@@ -18,4 +18,4 @@
 {"_id":"category-tapas","_type":"category","name":{"bg":"Тапас и апетайзъри","en":"Tapas & Appetizers"},"slug":{"_type":"slug","current":"tapas-apetayzari"},"group":"food","order":18,"isActive":true,"displayStyle":"cards"}
 {"_id":"category-fruits","_type":"category","name":{"bg":"Плодове","en":"Fruits"},"slug":{"_type":"slug","current":"plodove"},"group":"food","order":19,"isActive":true,"displayStyle":"compact"}
 {"_id":"category-desserts","_type":"category","name":{"bg":"Десерти","en":"Desserts"},"slug":{"_type":"slug","current":"deserti"},"group":"food","order":20,"isActive":true,"displayStyle":"cards"}
-{"_id":"category-healthy","_type":"category","name":{"bg":"Здравословно меню","en":"Healthy Menu"},"slug":{"_type":"slug","current":"zdravoslovno-menu"},"group":"food","order":21,"isActive":true,"displayStyle":"cards"}
+{"_id":"category-healthy","_type":"category","name":{"bg":"Здравословно меню","en":"Healthy Menu"},"slug":{"_type":"slug","current":"zdravoslovno-menu"},"group":"food","order":21,"isActive":true,"dis

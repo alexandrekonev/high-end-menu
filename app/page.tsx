@@ -12,5 +12,4 @@ export default async function Home() {
     client.fetch(settingsQuery),
   ])
 
-  return <MenuPage categories={categories} items={items} settings={settings} />
-}
+  return <MenuPage categories={categories} items={items} settings={s

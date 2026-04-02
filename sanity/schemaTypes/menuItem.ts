@@ -159,12 +159,4 @@ export const menuItem = defineType({
 
   orderings: [
     {
-      title: 'Категория → Наредба',
-      name: 'catOrder',
-      by: [
-        { field: 'category.order', direction: 'asc' },
-        { field: 'order', direction: 'asc' },
-      ],
-    },
-  ],
-})
+      title: 'Категория → Наредба',

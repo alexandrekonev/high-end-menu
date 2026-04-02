@@ -220,13 +220,4 @@ export default function MenuPage({ categories, items, settings }: Props) {
         />
         <div className={styles.footerName}>The High&#8209;End Bar</div>
         <div className={styles.footerAddress}>
-          {settings?.address || 'Realtons Place, бул. „Черни връх" 51Г, Sofia'}
-        </div>
-        <div className={styles.footerDivider} />
-        <div className={styles.footerNote}>
-          {settings?.footerNote || 'Prices include VAT'}
-        </div>
-      </footer>
-    </>
-  )
-}
+          {settings?.address || 'Realtons Place, бул. „Черни връх" 51

@@ -62,10 +62,4 @@ export default function ItemCard({ item, locale, fallbackIcon }: Props) {
         {/* Allergens */}
         {item.allergens && item.allergens.length > 0 && (
           <div className={s.allergens}>
-            {ui_t('allergens', locale)}: {item.allergens.map((a) => ui_t(`allergen_${a}` as never, locale)).join(', ')}
-          </div>
-        )}
-      </div>
-    </article>
-  )
-}
+            {ui_t('allergens', locale)}: {item.allergens.map((a) => ui_t(`allergen_${a}` as never, locale)).join(', ')

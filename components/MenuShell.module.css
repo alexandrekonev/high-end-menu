@@ -183,9 +183,4 @@
 }
 .footerNote { font-size: 10px; opacity: .5; letter-spacing: .05em; }
 
-/* ── Global mobile adjustments ── */
-@media (max-width: 400px) {
-  .headerName { font-size: 16px; letter-spacing: .15em; }
-  .catTitle   { font-size: 12px; }
-  .navBtn     { font-size: 9px; padding: 14px 9px 12px; }
-}
+/* ── Global mobile adjustments ──

@@ -73,7 +73,4 @@ export const todayMenuQuery = groq`
 
 // ── All Daily Menus (for Studio preview / archive) ──────────────
 export const allDailyMenusQuery = groq`
-  *[_type == "dailyMenu"] | order(date desc) {
-    _id, date, validFrom, validUntil, isActive,
-  }
-`
+  *[_type == "dailyMenu"] 

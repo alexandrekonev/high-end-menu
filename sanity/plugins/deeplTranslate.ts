@@ -112,8 +112,4 @@ function TranslateAction(props: DocumentActionProps): ReturnType<DocumentActionC
 }
 
 export const deeplTranslatePlugin = definePlugin({
-  name: 'deepl-translate',
-  document: {
-    actions: (prev) => [...prev, TranslateAction as DocumentActionComponent],
-  },
-})
+  name: 'deep

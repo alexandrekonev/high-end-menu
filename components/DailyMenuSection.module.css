@@ -61,4 +61,4 @@
 .dishTags { display: flex; gap: 4px; margin-top: 4px; }
 .dishTag { font-size: 12px; }
 
-.dishPrice { font-family: var(--font-sc); font-size: 15px; color: var(--copper-lt); flex-shrink: 0; }
+.dishPrice { font-family: var(--font-sc

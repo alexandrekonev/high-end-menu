@@ -18,5 +18,4 @@ export const serverClient = createClient({
   dataset,
   apiVersion,
   useCdn: false,
-  token: process.env.SANITY_API_TOKEN,
-})
+  token: process.env.S

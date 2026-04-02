@@ -227,6 +227,4 @@ npm run lint         # TypeScript + ESLint проверка
 | Изключване на изчерпан артикул | Studio → намери артикула → `isAvailable = false` |
 | Маркиране "Препоръчано" | Studio → артикула → `isFeatured = true` |
 | Днешно обедно меню | Studio → Обедно меню → Create → дата днес → Publish |
-| Превод на EN | В артикул → бутон **"🌐 Translate BG → EN"** |
-| Включване/изключване Happy Hour | Studio → Настройки |
-| Промяна на адрес/footer | Studio → Настройки |
+| Превод на EN 

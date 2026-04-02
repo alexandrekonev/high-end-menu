@@ -136,11 +136,4 @@ export const lunchMenu = defineType({
       }
     },
   },
-  orderings: [
-    {
-      title: 'Date (newest first)',
-      name: 'dateDesc',
-      by: [{ field: 'date', direction: 'desc' }],
-    },
-  ],
-})
+  orderi

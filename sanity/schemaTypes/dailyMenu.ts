@@ -150,11 +150,4 @@ export const dailyMenu = defineType({
             weekday: 'long', day: 'numeric', month: 'long',
           })
         : 'Без дата'
-      return { title: `${active ? '✅' : '⏸'} ${d}` }
-    },
-  },
-
-  orderings: [
-    { title: 'Дата (ново→старо)', name: 'dateDesc', by: [{ field: 'date', direction: 'desc' }] },
-  ],
-})
+      return { title: `${active ? '✅' : '⏸'} ${d}`

@@ -58,5 +58,4 @@ export const siteSettings = defineType({
       ],
     }),
   ],
-  preview: { prepare: () => ({ title: 'Site Settings' }) },
-})
+  p

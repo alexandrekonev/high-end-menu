@@ -260,12 +260,4 @@ export default function MenuShell({ locale, categories, items, settings, dailyMe
         <img src="https://www.high-end.bg/images/static/logo-sign-light.svg"
           alt="" className={s.footerLogo} />
         <div className={s.footerName}>The High&#8209;End Bar</div>
-        <div className={s.footerAddr}>{settings?.address || 'Sofia'}</div>
-        <div className={s.footerDivider} />
-        <div className={s.footerNote}>
-          {settings?.footerNote ? t(settings.footerNote, locale) : ui_t('copyright', locale)}
-        </div>
-      </footer>
-    </>
-  )
-}
+        <div className={s.footerAdd

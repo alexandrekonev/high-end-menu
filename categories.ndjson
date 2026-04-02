@@ -18,4 +18,4 @@
 {"_id":"category-tapas","_type":"category","name":{"bg":"Тапас и апетайзъри","en":"Tapas & Appetizers"},"emoji":"🫒","group":"food","order":18,"isActive":true}
 {"_id":"category-fruits","_type":"category","name":{"bg":"Плодове","en":"Fruits"},"emoji":"🍇","group":"food","order":19,"isActive":true}
 {"_id":"category-desserts","_type":"category","name":{"bg":"Десерти","en":"Desserts"},"emoji":"🍰","group":"food","order":20,"isActive":true}
-{"_id":"category-healthy","_type":"category","name":{"bg":"Здравословно меню","en":"Healthy Menu"},"emoji":"🥦","group":"food","order":21,"isActive":true}
+{"_id":"category-healthy","_type":"category","name":{"bg":"Здравословно меню","en":"Healthy Menu"},"emoji":"🥦","group":"food","order":

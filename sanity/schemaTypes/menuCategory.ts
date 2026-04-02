@@ -67,9 +67,4 @@ export const menuCategory = defineType({
     select: { title: 'title', subtitle: 'subtitle', active: 'active' },
     prepare({ title, subtitle, active }) {
       return {
-        title: `${active ? '✅' : '🚫'} ${title}`,
-        subtitle,
-      }
-    },
-  },
-})
+        title: `${active ?

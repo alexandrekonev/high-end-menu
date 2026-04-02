@@ -63,9 +63,4 @@ export default defineConfig({
           ]),
     }),
 
-    deeplTranslatePlugin(),
-    visionTool(),
-  ],
-
-  schema: { types: schemaTypes },
-})
+    deeplTranslatePlugin

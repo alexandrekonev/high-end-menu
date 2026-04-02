@@ -25,6 +25,4 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ revalidated: true, docType, now: Date.now() })
   } catch {
-    return NextResponse.json({ message: 'Error parsing body' }, { status: 400 })
-  }
-}
+    return NextResponse.json({ message: 'Error parsing body'

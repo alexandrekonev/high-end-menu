@@ -201,8 +201,4 @@
 .footerAddress {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 13px;
-  opacity: 0.8;
-}
-.footerDivider { width: 36px; height: 1px; background: rgba(255,255,255,0.3); margin: 12px auto; }
-.footerNote { font-size: 10px; opacity: 0.5; letter-spacing: 0.05em; }
+  fo

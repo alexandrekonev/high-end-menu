@@ -109,12 +109,4 @@ export default function DailyMenuSection({ menu, locale }: Props) {
 
                 {dish.price && (
                   <div className={s.dishPrice}>{dish.price} €</div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
+    
