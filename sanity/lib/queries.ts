@@ -16,7 +16,7 @@ export const settingsQuery = groq`
 export const categoriesQuery = groq`
   *[_type == "category" && isActive == true] | order(order asc) {
     _id,
-    "title": name.bg,
+    name,
     "slug": slug.current,
     icon,
     group,
@@ -28,8 +28,8 @@ export const categoriesQuery = groq`
 export const menuItemsQuery = groq`
   *[_type == "menuItem" && isAvailable == true] | order(category->order asc, order asc) {
     _id,
-    "name": name.bg,
-    "description": description.bg,
+    name,
+    description,
     price,
     volume,
     tags,
