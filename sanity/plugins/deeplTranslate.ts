@@ -92,8 +92,8 @@ function TranslateAction(props: DocumentActionProps): ReturnType<DocumentActionC
         })
 
         // Apply via Sanity client
-        const { client: sanityClient } = await import('@sanity/client')
-        const pClient = sanityClient({
+        const { createClient } = await import('@sanity/client')
+        const pClient = createClient({
           projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
           dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
           apiVersion: '2024-06-01',
@@ -112,4 +112,8 @@ function TranslateAction(props: DocumentActionProps): ReturnType<DocumentActionC
 }
 
 export const deeplTranslatePlugin = definePlugin({
-  name: 'deep
+  name: 'deepl-translate',
+  document: {
+    actions: (prev) => [...prev, TranslateAction as DocumentActionComponent],
+  },
+})
