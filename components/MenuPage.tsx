@@ -3,8 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styles from './MenuPage.module.css'
-import { MenuItemCard } from './MenuItemCard'
-import { MenuItemRow } from './MenuItemRow'
+// MenuItemCard and MenuItemRow are inlined below — no separate files needed
 
 interface Category {
   _id: string
@@ -161,7 +160,16 @@ export default function MenuPage({ categories, items, settings }: Props) {
               {cat.displayStyle === 'cards' ? (
                 <div className={styles.cardsGrid}>
                   {catItems.map((item) => (
-                    <MenuItemCard key={item._id} item={item} />
+                    <div key={item._id} className={styles.card}>
+                      <div className={styles.cardName}>{item.name}</div>
+                      {item.description && (
+                        <div className={styles.cardDesc}>{item.description}</div>
+                      )}
+                      <div className={styles.cardFooter}>
+                        <span className={styles.cardPrice}>{item.price} €</span>
+                        {item.volume && <span className={styles.cardVol}>{item.volume}</span>}
+                      </div>
+                    </div>
                   ))}
                 </div>
               ) : cat.displayStyle === 'compact' ? (
@@ -199,7 +207,18 @@ export default function MenuPage({ categories, items, settings }: Props) {
                         <div className={styles.subHeading}>{sub}</div>
                       )}
                       {subItems.map((item) => (
-                        <MenuItemRow key={item._id} item={item} />
+                        <div key={item._id} className={styles.listRow}>
+                          <div className={styles.listInfo}>
+                            <span className={styles.listName}>{item.name}</span>
+                            {item.description && (
+                              <span className={styles.listDesc}>{item.description}</span>
+                            )}
+                          </div>
+                          <div className={styles.listRight}>
+                            <span className={styles.listPrice}>{item.price} €</span>
+                            {item.volume && <span className={styles.listVol}>{item.volume}</span>}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   ))}

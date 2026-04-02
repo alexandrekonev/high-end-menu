@@ -1,5 +1,5 @@
 import { client } from '@/sanity/lib/client'
-import { todayLunchQuery, settingsQuery } from '@/sanity/lib/queries'
+import { todayMenuQuery, settingsQuery } from '@/sanity/lib/queries'
 import LunchPage from '@/components/LunchPage'
 
 // Revalidate frequently — staff publish throughout the morning
@@ -9,7 +9,7 @@ export default async function Lunch() {
   const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD
 
   const [lunchMenu, settings] = await Promise.all([
-    client.fetch(todayLunchQuery, { today }),
+    client.fetch(todayMenuQuery, { today }),
     client.fetch(settingsQuery),
   ])
 
