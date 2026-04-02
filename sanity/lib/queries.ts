@@ -16,7 +16,7 @@ export const settingsQuery = groq`
 export const categoriesQuery = groq`
   *[_type == "category" && isActive == true] | order(order asc) {
     _id,
-    name,
+    "title": name.bg,
     "slug": slug.current,
     icon,
     group,
@@ -28,8 +28,8 @@ export const categoriesQuery = groq`
 export const menuItemsQuery = groq`
   *[_type == "menuItem" && isAvailable == true] | order(category->order asc, order asc) {
     _id,
-    name,
-    description,
+    "name": name.bg,
+    "description": description.bg,
     price,
     volume,
     tags,
@@ -73,4 +73,7 @@ export const todayMenuQuery = groq`
 
 // ── All Daily Menus (for Studio preview / archive) ──────────────
 export const allDailyMenusQuery = groq`
-  *[_type == "dailyMenu"] 
+  *[_type == "dailyMenu"] | order(date desc) {
+    _id, date, validFrom, validUntil, isActive,
+  }
+`
