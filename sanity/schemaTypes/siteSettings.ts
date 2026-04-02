@@ -5,8 +5,6 @@ export const siteSettings = defineType({
   title: 'Настройки на сайта',
   type: 'document',
   icon: () => '⚙️',
-  // Singleton — only one document of this type
-  __experimental_actions: ['update', 'publish'],
   fields: [
     // Happy Hour
     defineField({
@@ -58,4 +56,5 @@ export const siteSettings = defineType({
       ],
     }),
   ],
-  p
+  preview: { prepare: () => ({ title: 'Site Settings' }) },
+})
