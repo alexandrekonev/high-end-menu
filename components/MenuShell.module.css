@@ -1,0 +1,191 @@
+/* ── Sticky wrapper (header + happy hour + nav) ── */
+.stickyTop {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.45);
+}
+
+/* ── Header ── */
+.header {
+  background: var(--copper);
+  text-align: center;
+  padding: 13px 16px 10px;
+}
+.logo {
+  width: 38px; height: 38px;
+  margin: 0 auto 5px;
+  border-radius: 50%;
+  padding: 6px;
+  background: rgba(19,32,40,0.30);
+  object-fit: contain;
+  display: block;
+}
+.logoText {
+  display: block;
+  width: auto;
+  max-width: 128px;
+  height: auto;
+  margin: 0 auto 8px;
+}
+.langBtn {
+  display: inline-block;
+  background: rgba(19,32,40,.3);
+  color: var(--beige);
+  font-family: var(--font-sc);
+  font-size: 9px;
+  letter-spacing: .15em;
+  padding: 5px 14px;
+  border-radius: 20px;
+  transition: background .2s;
+  min-height: 32px;
+  line-height: 22px;
+}
+.langBtn:hover { background: rgba(19,32,40,.55); }
+
+/* ── Happy Hour ── */
+.happyBanner {
+  background: linear-gradient(90deg, var(--copper-dk), var(--copper), var(--copper-dk));
+  color: #fff;
+  text-align: center;
+  padding: 8px 20px;
+  font-family: var(--font-sc);
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+.happyIcon { font-size: 14px; }
+
+/* ── Nav ── */
+.nav {
+  background: var(--dark);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--divider);
+}
+.nav::-webkit-scrollbar { display: none; }
+.navInner {
+  display: inline-flex;
+  padding: 0 8px;
+  /* Ensure it stretches at minimum to full width so short lists don't float left */
+  min-width: 100%;
+}
+.navBtn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--warm-gray);
+  font-family: var(--font-sc);
+  font-size: 10px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  padding: 14px 11px 12px;
+  transition: color .2s, border-color .2s;
+  white-space: nowrap;
+  cursor: pointer;
+  /* Larger tap target */
+  min-height: 44px;
+}
+.navBtn:hover,
+.navBtnActive {
+  color: var(--copper-lt);
+  border-bottom-color: var(--copper);
+}
+
+/* ── Group heading ── */
+.group { padding-top: 4px; }
+.groupHeading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px 6px;
+  font-family: var(--font-sc);
+  font-size: 9px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+}
+.groupHeading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--divider);
+}
+
+/* ── Category Section ── */
+.catSection { padding: 16px 12px 4px; }
+.catHeading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.catLine { flex: 1; height: 1px; background: var(--divider); }
+.catTitle {
+  font-family: var(--font-sc);
+  font-size: 13px;
+  letter-spacing: .2em;
+  color: var(--copper-lt);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.catIcon { margin-right: 5px; }
+.subHeading {
+  font-family: var(--font-sc);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  padding: 14px 6px 5px;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 2px;
+}
+
+/* ── Cards grid ── */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding-bottom: 6px;
+}
+@media (min-width: 480px) { .cardsGrid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 700px) { .cardsGrid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ── Section wrapper for daily menu ── */
+.section { padding: 16px 12px 4px; }
+
+/* ── Footer ── */
+.footer {
+  background: var(--copper);
+  color: rgba(255,255,255,.75);
+  text-align: center;
+  padding: 28px 20px;
+  margin-top: 40px;
+}
+.footerLogo { width: 40px; margin: 0 auto 10px; opacity: .9; display: block; }
+.footerName {
+  font-family: var(--font-sc);
+  font-size: 13px;
+  letter-spacing: .2em;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.footerAddr {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  opacity: .8;
+}
+.footerDivider {
+  width: 36px; height: 1px;
+  background: rgba(255,255,255,.28);
+  margin: 12px auto;
+}
+.footerNote { font-size: 10px; opacity: .5; letter-spacing: .05em; }
+
+/* ── Global mobile adjustments ── */
+@media (max-width: 400px) {
+  .headerName { font-size: 16px; letter-spacing: .15em; }
+  .catTitle   { font-size: 12px; }
+  .navBtn     { font-size: 9px; padding: 14px 9px 12px; }
+}

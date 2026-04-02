@@ -1,0 +1,42 @@
+/* ── Full row (list style) ── */
+.row {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 11px 6px; border-bottom: 1px solid rgba(132,93,65,.1);
+  transition: background .15s;
+}
+.row:last-child { border-bottom: none; }
+.row:hover { background: rgba(132,93,65,.05); border-radius: 8px; }
+
+.thumb { width: 58px; height: 58px; border-radius: 8px; overflow: hidden; flex-shrink: 0; position: relative; background: var(--dark-card); }
+.thumbImg { object-fit: cover; }
+.thumbPlaceholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 22px; opacity: .3; }
+
+.info { flex: 1; min-width: 0; }
+.nameRow { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-bottom: 2px; }
+.name { font-family: var(--font-serif); font-weight: 500; font-size: 15px; color: var(--silver); }
+.badge { font-size: 8px; font-family: var(--font-sc); letter-spacing: .08em; padding: 2px 7px; border-radius: 20px; color: #fff; white-space: nowrap; }
+.badgeNew  { background: var(--tag-new); }
+.badgeFeat { background: var(--tag-featured); }
+.origin { font-size: 10px; color: var(--copper-lt); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+.desc { font-size: 10.5px; color: rgba(153,167,167,.75); line-height: 1.4; margin-top: 2px; }
+.tags { display: flex; gap: 4px; margin-top: 4px; }
+.tag { font-size: 12px; }
+.allergens { font-size: 9px; color: rgba(153,167,167,.5); margin-top: 4px; }
+
+.right { text-align: right; flex-shrink: 0; padding-top: 2px; }
+.price { font-family: var(--font-sc); font-size: 16px; color: var(--copper-lt); display: block; }
+.vol { font-size: 9px; color: var(--warm-gray); display: block; margin-top: 2px; }
+
+/* ── Compact row ── */
+.compact {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 10px 6px; border-bottom: 1px solid rgba(132,93,65,.08);
+}
+.compact:last-child { border-bottom: none; }
+.compactInfo { flex: 1; }
+.compactName { font-family: var(--font-serif); font-size: 14px; color: var(--silver); display: block; }
+.compactDesc { font-size: 10px; color: var(--warm-gray); display: block; margin-top: 2px; }
+.inlineNew  { font-size: 10px; }
+.inlineFeat { font-size: 10px; }
+.smallTag { font-size: 11px; margin-left: 3px; }
+.compactRight { text-align: right; flex-shrink: 0; margin-left: 10px; }

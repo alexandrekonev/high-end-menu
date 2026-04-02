@@ -1,0 +1,46 @@
+.card {
+  background: var(--dark-card);
+  border-radius: 10px; overflow: hidden;
+  border: 1px solid rgba(132,93,65,.18);
+  transition: transform .18s;
+}
+.card:active { transform: scale(.97); }
+
+/* ── Photo ── */
+.photoWrap { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
+.photo { object-fit: cover; transition: transform .4s; }
+.card:hover .photo { transform: scale(1.04); }
+
+/* ── Placeholder (no photo) ── */
+.placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--dark-card) 0%, #0e1d24 100%);
+}
+.placeholderIcon { font-size: 36px; opacity: .22; }
+
+/* ── Badges ── */
+.badges { position: absolute; top: 7px; right: 7px; display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+.badge {
+  font-family: var(--font-sc); font-size: 8px; letter-spacing: .08em;
+  padding: 2px 7px; border-radius: 20px; color: #fff; white-space: nowrap;
+}
+.badgeNew     { background: var(--tag-new); }
+.badgeFeatured{ background: var(--tag-featured); }
+
+/* ── Body ── */
+.body { padding: 9px 10px 11px; }
+.name { font-family: var(--font-serif); font-weight: 500; font-size: 14px; color: var(--silver); line-height: 1.2; margin-bottom: 4px; }
+.desc { font-size: 10px; color: var(--warm-gray); line-height: 1.4; margin-bottom: 6px; }
+
+/* ── Tags ── */
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 7px; }
+.tag { font-size: 10px; background: rgba(132,93,65,.15); color: var(--copper-lt); border-radius: 20px; padding: 2px 7px; }
+
+/* ── Footer ── */
+.footer { display: flex; justify-content: space-between; align-items: baseline; }
+.price { font-family: var(--font-sc); font-size: 15px; color: var(--copper-lt); font-weight: 500; }
+.volume { font-size: 9px; color: var(--warm-gray); }
+
+/* ── Allergens ── */
+.allergens { font-size: 9px; color: rgba(153,167,167,.6); margin-top: 5px; line-height: 1.3; }

@@ -1,0 +1,21 @@
+{"_id":"category-espresso","_type":"category","name":{"bg":"Еспресо напитки","en":"Espresso Drinks"},"emoji":"☕","group":"hot","order":1,"isActive":true}
+{"_id":"category-tea","_type":"category","name":{"bg":"Чайове","en":"Teas"},"emoji":"🍵","group":"hot","order":2,"isActive":true}
+{"_id":"category-hot-chocolate","_type":"category","name":{"bg":"Горещ шоколад","en":"Hot Chocolate"},"emoji":"🍫","group":"hot","order":3,"isActive":true}
+{"_id":"category-fresh","_type":"category","name":{"bg":"Фрешове и смутита","en":"Juices & Smoothies"},"emoji":"🥤","group":"cold","order":4,"isActive":true}
+{"_id":"category-cold-coffee","_type":"category","name":{"bg":"Студено кафе","en":"Cold Coffee"},"emoji":"🧊","group":"cold","order":5,"isActive":true}
+{"_id":"category-soft-drinks","_type":"category","name":{"bg":"Газирани напитки","en":"Soft Drinks"},"emoji":"🫧","group":"cold","order":6,"isActive":true}
+{"_id":"category-water","_type":"category","name":{"bg":"Вода","en":"Water"},"emoji":"💧","group":"cold","order":7,"isActive":true}
+{"_id":"category-wine","_type":"category","name":{"bg":"Вина","en":"Wines"},"emoji":"🍷","group":"alcohol","order":8,"isActive":true}
+{"_id":"category-beer","_type":"category","name":{"bg":"Бира","en":"Beer"},"emoji":"🍺","group":"alcohol","order":9,"isActive":true}
+{"_id":"category-whiskey","_type":"category","name":{"bg":"Уиски","en":"Whiskey"},"emoji":"🥃","group":"alcohol","order":10,"isActive":true}
+{"_id":"category-cocktails","_type":"category","name":{"bg":"Коктейли","en":"Cocktails"},"emoji":"🍸","group":"alcohol","order":11,"isActive":true}
+{"_id":"category-spirits","_type":"category","name":{"bg":"Джин / Водка / Ром / Текила","en":"Gin / Vodka / Rum / Tequila"},"emoji":"🫙","group":"alcohol","order":12,"isActive":true}
+{"_id":"category-aperitif","_type":"category","name":{"bg":"Аперитиви и Дижестиви","en":"Aperitifs & Digestifs"},"emoji":"🍾","group":"alcohol","order":13,"isActive":true}
+{"_id":"category-directors","_type":"category","name":{"bg":"Директорски шкаф","en":"Director's Cabinet"},"emoji":"💎","group":"alcohol","order":14,"isActive":true}
+{"_id":"category-sandwiches","_type":"category","name":{"bg":"Закуски и сандвичи","en":"Snacks & Sandwiches"},"emoji":"🥪","group":"food","order":15,"isActive":true}
+{"_id":"category-salads","_type":"category","name":{"bg":"Салати","en":"Salads"},"emoji":"🥗","group":"food","order":16,"isActive":true}
+{"_id":"category-soups","_type":"category","name":{"bg":"Супи","en":"Soups"},"emoji":"🍲","group":"food","order":17,"isActive":true}
+{"_id":"category-tapas","_type":"category","name":{"bg":"Тапас и апетайзъри","en":"Tapas & Appetizers"},"emoji":"🫒","group":"food","order":18,"isActive":true}
+{"_id":"category-fruits","_type":"category","name":{"bg":"Плодове","en":"Fruits"},"emoji":"🍇","group":"food","order":19,"isActive":true}
+{"_id":"category-desserts","_type":"category","name":{"bg":"Десерти","en":"Desserts"},"emoji":"🍰","group":"food","order":20,"isActive":true}
+{"_id":"category-healthy","_type":"category","name":{"bg":"Здравословно меню","en":"Healthy Menu"},"emoji":"🥦","group":"food","order":21,"isActive":true}

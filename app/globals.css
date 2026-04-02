@@ -1,0 +1,47 @@
+/* ══════════════════════════════════════════
+   Brand Design Tokens — The High-End Bar
+   ══════════════════════════════════════════ */
+:root {
+  /* Colour palette extracted from high-end.bg */
+  --copper:      #845D41;
+  --copper-lt:   #A0775A;
+  --copper-dk:   #5E3F28;
+  --dark:        #132028;
+  --dark-card:   #1C2D36;
+  --dark-hover:  #223542;
+  --silver:      #D8DEDE;
+  --warm-gray:   #99A7A7;
+  --beige:       #DFDBD8;
+  --off-white:   #F5F3F1;
+  --white:       #FFFFFF;
+  --divider:     rgba(132, 93, 65, 0.30);
+
+  /* Tag colours */
+  --tag-vegetarian: #2a6052;
+  --tag-vegan:      #1f5c2e;
+  --tag-gluten:     #5c4a1f;
+  --tag-spicy:      #7a2020;
+  --tag-premium:    #5a4a1f;
+  --tag-new:        #1f3f5c;
+  --tag-featured:   #845D41;
+
+  /* Typography */
+  --font-serif:   'Cormorant Garamond', Georgia, serif;
+  --font-sc:      'Cormorant SC', Georgia, serif;
+  --font-sans:    'Open Sans', Arial, sans-serif;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--silver);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; width: 100%; object-fit: cover; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; }

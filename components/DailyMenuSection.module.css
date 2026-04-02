@@ -1,0 +1,64 @@
+.wrapper {
+  background: var(--dark-card);
+  border: 1px solid rgba(132,93,65,.22);
+  border-radius: 12px; overflow: hidden;
+}
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(90deg, var(--copper-dk), var(--copper));
+  padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+}
+.headerIcon { font-size: 24px; }
+.title { font-family: var(--font-sc); font-size: 14px; letter-spacing: .18em; color: #fff; }
+.hours { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 2px; font-family: var(--font-serif); font-style: italic; }
+.pill {
+  margin-left: auto; font-family: var(--font-sc); font-size: 9px;
+  letter-spacing: .1em; padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+}
+.pillActive   { background: rgba(42,96,82,.7); color: #a0e0c8; }
+.pillInactive { background: rgba(19,32,40,.6); color: var(--warm-gray); }
+
+/* ── Inactive state ── */
+.inactive {
+  text-align: center; padding: 32px 20px;
+  font-family: var(--font-serif); color: var(--warm-gray);
+}
+.inactiveIcon { font-size: 36px; display: block; margin-bottom: 10px; }
+.inactive p { font-size: 15px; font-style: italic; }
+.inactiveHours { font-size: 13px; opacity: .65; margin-top: 6px !important; }
+
+/* ── Chef note ── */
+.chefNote {
+  padding: 12px 16px; background: rgba(132,93,65,.08);
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13px; color: var(--warm-gray); border-bottom: 1px solid var(--divider);
+}
+.chefNoteIcon { font-style: normal; }
+
+/* ── Section ── */
+.section { padding: 14px 14px 6px; }
+.sectionHeading {
+  font-family: var(--font-sc); font-size: 11px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--copper-lt);
+  padding-bottom: 8px; border-bottom: 1px solid var(--divider); margin-bottom: 8px;
+}
+
+/* ── Dish ── */
+.dishes { display: flex; flex-direction: column; gap: 2px; }
+.dish {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 6px; border-bottom: 1px solid rgba(132,93,65,.08);
+}
+.dish:last-child { border-bottom: none; }
+
+.dishPhoto { width: 52px; height: 52px; border-radius: 7px; overflow: hidden; flex-shrink: 0; position: relative; }
+.dishImg { object-fit: cover; }
+
+.dishInfo { flex: 1; }
+.dishName { font-family: var(--font-serif); font-size: 15px; color: var(--silver); font-weight: 500; }
+.dishDesc { font-size: 11px; color: var(--warm-gray); margin-top: 2px; }
+.dishTags { display: flex; gap: 4px; margin-top: 4px; }
+.dishTag { font-size: 12px; }
+
+.dishPrice { font-family: var(--font-sc); font-size: 15px; color: var(--copper-lt); flex-shrink: 0; }
