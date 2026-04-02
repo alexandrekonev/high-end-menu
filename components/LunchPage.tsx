@@ -56,7 +56,7 @@ export default function LunchPage({ lunchMenu, settings, locale = 'bg' }: Props)
 
       {/* Daily menu section */}
       {lunchMenu ? (
-        <DailyMenuSection menu={lunchMenu} locale={locale} />
+        <DailyMenuSection menu={lunchMenu as any} locale={locale} />
       ) : (
         <p
           style={{
