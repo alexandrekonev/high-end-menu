@@ -239,4 +239,12 @@ export default function MenuPage({ categories, items, settings }: Props) {
         />
         <div className={styles.footerName}>The High&#8209;End Bar</div>
         <div className={styles.footerAddress}>
-          {settings?.address || 'Realtons Place, бул. „Черни връх" 51
+          {settings?.address || 'Realtons Place, бул. „Черни връх" 51, София'}
+        </div>
+        {settings?.footerNote && (
+          <div className={styles.footerNote}>{settings.footerNote}</div>
+        )}
+      </footer>
+    </>
+  )
+}

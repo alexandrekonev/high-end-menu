@@ -13,4 +13,5 @@ export default async function Lunch() {
     client.fetch(settingsQuery),
   ])
 
-  return <LunchPage lunchMenu={lunchMenu} settings={
+  return <LunchPage lunchMenu={lunchMenu} settings={settings} />
+}
