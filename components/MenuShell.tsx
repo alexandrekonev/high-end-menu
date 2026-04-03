@@ -92,10 +92,8 @@ export default function MenuShell({
     setActiveSlug(slug)
     const el = document.getElementById(`section-${slug}`)
     if (el) {
-      const navHeight = navRef.current?.offsetHeight || 0
-      const headerHeight = 80
-      const offset = headerHeight + navHeight + 16
-      const top = el.getBoundingClientRect().top + window.scrollY - offset
+      const navHeight = navRef.current?.offsetHeight || 48
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 16
       window.scrollTo({ top, behavior: 'smooth' })
     }
     // Scroll active nav button into view

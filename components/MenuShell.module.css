@@ -164,7 +164,7 @@
 /* ── Category Section ── */
 .section {
   margin-bottom: 3.5rem;
-  scroll-margin-top: 140px;
+  scroll-margin-top: 64px;
 }
 
 .sectionTitle {
@@ -315,7 +315,7 @@
   }
 
   .section {
-    scroll-margin-top: 125px;
+    scroll-margin-top: 56px;
   }
 
   .sectionTitle {
