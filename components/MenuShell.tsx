@@ -50,6 +50,7 @@ export default function MenuShell({
   )
   const navRef = useRef<HTMLDivElement>(null)
   const observerRef = useRef<IntersectionObserver | null>(null)
+  const isScrollingRef = useRef(false)
 
   const happyHourActive =
     settings?.happyHourActive &&
@@ -90,15 +91,19 @@ export default function MenuShell({
   // Scroll to section when nav button clicked
   const scrollToSection = (slug: string) => {
     setActiveSlug(slug)
-    const el = document.getElementById(`section-${slug}`)
-    if (el) {
-      const navHeight = navRef.current?.offsetHeight || 48
-      const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 16
-      window.scrollTo({ top, behavior: 'smooth' })
-    }
-    // Scroll active nav button into view
+    // Scroll active nav button into view horizontally
     const btn = document.getElementById(`nav-${slug}`)
     if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    // Block observer updates while scrolling
+    isScrollingRef.current = true
+    setTimeout(() => { isScrollingRef.current = false }, 1000)
+    setTimeout(() => {
+      const el = document.getElementById(`section-${slug}`)
+      if (!el) return
+      const navHeight = navRef.current?.offsetHeight || 50
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 8
+      window.scrollTo({ top, behavior: 'smooth' })
+    }, 10)
   }
 
   // Highlight active nav button on scroll (IntersectionObserver)
@@ -107,7 +112,7 @@ export default function MenuShell({
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !isScrollingRef.current) {
             const slug = entry.target.getAttribute('data-slug')
             if (slug) setActiveSlug(slug)
           }
