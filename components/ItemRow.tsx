@@ -1,4 +1,4 @@
-import { Locale, t, toEur } from '@/lib/i18n'
+import { Locale, t, toBgn } from '@/lib/i18n'
 import { MenuItemData } from './MenuShell'
 import styles from './ItemRow.module.css'
 
@@ -46,8 +46,8 @@ export default function ItemRow({ item, locale, compact = false, showPriceBgn = 
           </div>
           {(showPriceBgn || showPriceEur) && (
             <div className={styles.priceGroup}>
-              {showPriceEur && <span className={styles.priceEur}>€ {toEur(item.price)}</span>}
-              {showPriceBgn && <span className={styles.price}>{item.price} лв.</span>}
+              {showPriceEur && <span className={styles.priceEur}>€ {item.price}</span>}
+              {showPriceBgn && <span className={styles.price}>{toBgn(item.price)} лв.</span>}
             </div>
           )}
         </div>

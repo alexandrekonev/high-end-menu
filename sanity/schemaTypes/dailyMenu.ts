@@ -7,9 +7,8 @@ export default defineType({
   fields: [
     defineField({
       name: 'date',
-      title: 'Date (YYYY-MM-DD)',
-      type: 'string',
-      description: 'Format: YYYY-MM-DD',
+      title: 'Date',
+      type: 'date',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -20,15 +19,27 @@ export default defineType({
     }),
     defineField({
       name: 'validFrom',
-      title: 'Valid From (HH:MM)',
+      title: 'Valid From',
       type: 'string',
-      description: 'e.g. "12:00"',
+      options: {
+        list: [
+          '10:00','10:30','11:00','11:30',
+          '12:00','12:30','13:00','13:30',
+          '14:00','14:30','15:00','15:30',
+        ],
+      },
     }),
     defineField({
       name: 'validUntil',
-      title: 'Valid Until (HH:MM)',
+      title: 'Valid Until',
       type: 'string',
-      description: 'e.g. "15:00"',
+      options: {
+        list: [
+          '12:00','12:30','13:00','13:30',
+          '14:00','14:30','15:00','15:30',
+          '16:00','16:30','17:00',
+        ],
+      },
     }),
     defineField({
       name: 'chefNote',

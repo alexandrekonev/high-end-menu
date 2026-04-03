@@ -1,4 +1,4 @@
-import { Locale, t, isNew, toEur } from '@/lib/i18n'
+import { Locale, t, isNew, toBgn } from '@/lib/i18n'
 import { MenuItemData } from './MenuShell'
 import styles from './ItemCard.module.css'
 
@@ -77,8 +77,8 @@ export default function ItemCard({ item, locale, showPriceBgn = true, showPriceE
         {/* Price */}
         {(showPriceBgn || showPriceEur) && (
           <div className={styles.priceSection}>
-            {showPriceEur && <span className={styles.priceEur}>€ {toEur(item.price)}</span>}
-            {showPriceBgn && <span className={styles.price}>{item.price} лв.</span>}
+            {showPriceEur && <span className={styles.priceEur}>€ {item.price}</span>}
+            {showPriceBgn && <span className={styles.price}>{toBgn(item.price)} лв.</span>}
           </div>
         )}
       </div>

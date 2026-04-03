@@ -52,20 +52,23 @@ export default function MenuShell({
   const observerRef = useRef<IntersectionObserver | null>(null)
   const isScrollingRef = useRef(false)
 
+  // Happy Hour: show if active + within time window (if times set)
   const happyHourActive =
-    settings?.happyHourActive &&
-    isWithinTimeWindow(
-      settings?.happyHourFrom || '17:00',
-      settings?.happyHourUntil || '18:00'
+    settings?.happyHourActive && (
+      !settings?.happyHourFrom || !settings?.happyHourUntil ||
+      isWithinTimeWindow(settings.happyHourFrom, settings.happyHourUntil)
     )
 
+  // Lunch: show if active + daily menu exists + within time window (if times set)
   const lunchMenuActive =
     settings?.lunchMenuActive &&
-    dailyMenu &&
-    isWithinTimeWindow(
-      dailyMenu?.validFrom || '12:00',
-      dailyMenu?.validUntil || '15:00'
+    dailyMenu && (
+      !dailyMenu?.validFrom || !dailyMenu?.validUntil ||
+      isWithinTimeWindow(dailyMenu.validFrom, dailyMenu.validUntil)
     )
+
+  const lunchTitle = t(settings?.lunchMenuTitle, locale) ||
+    (locale === 'bg' ? 'Обедно меню' : 'Lunch Menu')
 
   // Group items by category slug
   const itemsByCategory: { [key: string]: MenuItemData[] } = {}
@@ -160,11 +163,18 @@ export default function MenuShell({
         </div>
       </header>
 
-      {/* Happy Hour Banner */}
+      {/* Happy Hour Overlay */}
       {happyHourActive && (
-        <div className={styles.happyHourBanner}>
-          <span>🍹</span>
-          <span>{t(settings?.happyHourText, locale) || ui_t('happyHour', locale)}</span>
+        <div className={styles.happyHourOverlay}>
+          <div className={styles.happyHourInner}>
+            <span className={styles.happyHourLabel}>
+              {locale === 'bg' ? 'Happy Hour' : 'Happy Hour'}
+            </span>
+            <div className={styles.happyHourRule} />
+            <span className={styles.happyHourText}>
+              {t(settings?.happyHourText, locale) || ui_t('happyHour', locale)}
+            </span>
+          </div>
         </div>
       )}
 
@@ -190,6 +200,8 @@ export default function MenuShell({
         {/* Daily Lunch Menu */}
         {lunchMenuActive && (
           <section className={styles.lunchSection}>
+            <h2 className={styles.lunchSectionTitle}>{lunchTitle}</h2>
+            <div className={styles.divider} />
             <DailyMenuSection menu={dailyMenu as any} locale={locale} />
           </section>
         )}

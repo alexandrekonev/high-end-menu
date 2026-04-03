@@ -5,6 +5,7 @@ export const settingsQuery = `
     happyHourUntil,
     happyHourText,
     lunchMenuActive,
+    lunchMenuTitle,
     showPriceBgn,
     showPriceEur,
     address,
@@ -34,7 +35,7 @@ export const menuItemsQuery = `
     allergens,
     subCategory,
     _createdAt,
-    image,
+    "image": image.asset->url,
     "categorySlug": category->slug.current
   }
 `
@@ -53,7 +54,7 @@ export const todayMenuQuery = `
         description,
         price,
         tags,
-        image
+        "image": image.asset->url
       }
     }
   }

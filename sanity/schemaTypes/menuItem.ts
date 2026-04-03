@@ -51,7 +51,7 @@ export default defineType({
       name: 'price',
       title: 'Price',
       type: 'string',
-      description: 'e.g. "8" or "12 / 55"',
+      description: 'Enter price in EUR — e.g. "4.60" or "6 / 28" (glass/bottle). BGN is auto-calculated.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
