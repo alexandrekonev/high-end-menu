@@ -36,7 +36,14 @@ export default function ItemRow({ item, locale, compact = false, showPriceBgn = 
       {/* Main Content */}
       <div className={styles.mainContent}>
         <div className={styles.header}>
-          <h4 className={styles.name}>{t(item.name, locale)}</h4>
+          <div className={styles.nameCol}>
+            <h4 className={styles.name}>{t(item.name, locale)}</h4>
+            {item.isFeatured && (
+              <span className={styles.featuredBadge}>
+                ⭐ {locale === 'bg' ? 'Препоръчано' : 'Featured'}
+              </span>
+            )}
+          </div>
           {(showPriceBgn || showPriceEur) && (
             <div className={styles.priceGroup}>
               {showPriceEur && <span className={styles.priceEur}>€ {toEur(item.price)}</span>}

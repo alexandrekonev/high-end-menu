@@ -81,6 +81,34 @@
 }
 
 /* Tags */
+.nameRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.featured {
+  border-color: var(--copper);
+  box-shadow: 0 0 0 1px var(--copper-dk), 0 4px 16px rgba(132, 93, 65, 0.2);
+}
+
+.featuredBadge {
+  flex-shrink: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--copper);
+  background: rgba(132, 93, 65, 0.15);
+  border: 1px solid var(--copper-dk);
+  border-radius: 3px;
+  padding: 0.2rem 0.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

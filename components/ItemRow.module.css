@@ -47,13 +47,35 @@
   gap: 1rem;
 }
 
+.nameCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
 .name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
   color: var(--silver);
   margin: 0;
   font-weight: 600;
-  flex: 1;
+}
+
+.featuredBadge {
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--copper);
+  background: rgba(132, 93, 65, 0.15);
+  border: 1px solid var(--copper-dk);
+  border-radius: 3px;
+  padding: 0.15rem 0.45rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  width: fit-content;
 }
 
 .priceGroup {

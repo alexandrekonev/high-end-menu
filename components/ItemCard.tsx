@@ -22,7 +22,7 @@ export default function ItemCard({ item, locale, showPriceBgn = true, showPriceE
   }
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${item.isFeatured ? styles.featured : ''}`}>
       {/* Image Section */}
       {item.image && (
         <div className={styles.imageWrapper}>
@@ -37,7 +37,14 @@ export default function ItemCard({ item, locale, showPriceBgn = true, showPriceE
 
       {/* Content Section */}
       <div className={styles.content}>
-        <h3 className={styles.name}>{t(item.name, locale)}</h3>
+        <div className={styles.nameRow}>
+          <h3 className={styles.name}>{t(item.name, locale)}</h3>
+          {item.isFeatured && (
+            <span className={styles.featuredBadge}>
+              ⭐ {locale === 'bg' ? 'Препоръчано' : 'Featured'}
+            </span>
+          )}
+        </div>
 
         {item.description && (
           <p className={styles.description}>{t(item.description, locale)}</p>
