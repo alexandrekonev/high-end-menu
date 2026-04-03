@@ -1,6 +1,6 @@
 import { client } from '@/sanity/lib/client'
 import { todayMenuQuery } from '@/sanity/lib/queries'
-import { DailyMenuSection } from '@/components/DailyMenuSection'
+import DailyMenuSection from '@/components/DailyMenuSection'
 import { ui_t } from '@/lib/i18n'
 import styles from './lunch.module.css'
 
