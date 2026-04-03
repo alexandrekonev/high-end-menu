@@ -5,10 +5,8 @@
   background-color: var(--dark-card);
   border: 1px solid var(--divider);
   border-radius: 6px;
-  overflow: visible;           /* allow image to expand on hover */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 1;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
 }
 
 .row:hover {
@@ -21,15 +19,12 @@
   /* compact handled via mainContent padding */
 }
 
-/* Content — left, takes remaining space */
+/* Content — left */
 .mainContent {
   order: 1;
   flex: 1;
   padding: 1.5rem;
   min-width: 0;
-  border-radius: 6px 0 0 6px;
-  background-color: var(--dark-card);
-  overflow: hidden;
 }
 
 .row.compact .mainContent {
@@ -39,35 +34,25 @@
 /* Thumbnail — RIGHT side */
 .thumbnail {
   order: 2;
-  width: 88px;
+  width: 80px;
   flex-shrink: 0;
   align-self: stretch;
-  position: relative;
-  background-color: rgba(12, 20, 25, 0.9);
+  overflow: hidden;
   border-left: 1px solid var(--divider);
   border-radius: 0 6px 6px 0;
-  z-index: 1;
-  clip-path: inset(0 0 0 0 round 0 6px 6px 0);
-  transition: clip-path 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: width;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .row:hover .thumbnail {
-  clip-path: inset(-300px 0 -300px -600px round 0px);
-  z-index: 20;
+  width: 190px;
 }
 
 .image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
-  transform-origin: right center;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(12, 20, 25, 0.9);
-}
-
-.row:hover .image {
-  transform: scale(3.5);
 }
 
 .mainContent {
@@ -196,11 +181,11 @@
 
 @media (max-width: 768px) {
   .thumbnail {
-    width: 70px;
+    width: 68px;
   }
 
-  .row:hover .image {
-    transform: scale(3);
+  .row:hover .thumbnail {
+    width: 150px;
   }
 
   .mainContent {
@@ -223,10 +208,10 @@
 
 @media (max-width: 480px) {
   .thumbnail {
-    width: 58px;
+    width: 56px;
   }
 
-  .row:hover .image {
-    transform: scale(2.5);
+  .row:hover .thumbnail {
+    width: 120px;
   }
 }
