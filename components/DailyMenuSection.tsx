@@ -2,10 +2,30 @@ import { PortableText, PortableTextComponents } from '@portabletext/react'
 import { Locale, t, ui_t, isWithinTimeWindow } from '@/lib/i18n'
 import styles from './DailyMenuSection.module.css'
 
-// Minimal components for the Chef's Note portable text
-const chefNoteComponents: PortableTextComponents = {
+const EUR_TO_BGN = 1.95583
+
+function formatDishPrice(price: number | string | null | undefined, showBgn: boolean = true): string | null {
+  if (price == null || price === '') return null
+  const num = typeof price === 'number' ? price : parseFloat(String(price).replace(',', '.'))
+  if (isNaN(num)) return null
+  const eur = `€ ${num.toFixed(2)}`
+  if (!showBgn) return eur
+  const bgn = `${(num * EUR_TO_BGN).toFixed(2)} лв.`
+  return `${eur} / ${bgn}`
+}
+
+// Portable Text components — each paragraph on its own line
+const chefDescComponents: PortableTextComponents = {
   block: {
-    normal: ({ children }) => <span>{children}</span>,
+    normal: ({ children }) => <p className={styles.chefDescPara}>{children}</p>,
+  },
+  list: {
+    bullet:   ({ children }) => <ul className={styles.chefDescList}>{children}</ul>,
+    number:   ({ children }) => <ol className={styles.chefDescList}>{children}</ol>,
+  },
+  listItem: {
+    bullet:   ({ children }) => <li>{children}</li>,
+    number:   ({ children }) => <li>{children}</li>,
   },
   marks: {
     strong: ({ children }) => <strong>{children}</strong>,
@@ -42,16 +62,18 @@ export default function DailyMenuSection({ menu, locale, hideTitle = false }: Da
       </div>
 
       {menu.chefNote && (
-        <div className={styles.chefNote}>
-          <strong>{ui_t('chefNote', locale)}:</strong>{' '}
-          {Array.isArray(menu.chefNote?.[locale] ?? menu.chefNote?.bg) ? (
-            <PortableText
-              value={menu.chefNote[locale] ?? menu.chefNote.bg}
-              components={chefNoteComponents}
-            />
-          ) : (
-            t(menu.chefNote, locale)
-          )}
+        <div className={styles.chefDesc}>
+          <p className={styles.chefDescLabel}>{ui_t('chefNote', locale)}</p>
+          <div className={styles.chefDescBody}>
+            {Array.isArray(menu.chefNote?.[locale] ?? menu.chefNote?.bg) ? (
+              <PortableText
+                value={menu.chefNote[locale] ?? menu.chefNote.bg}
+                components={chefDescComponents}
+              />
+            ) : (
+              <p className={styles.chefDescPara}>{t(menu.chefNote, locale)}</p>
+            )}
+          </div>
         </div>
       )}
 
@@ -75,8 +97,10 @@ export default function DailyMenuSection({ menu, locale, hideTitle = false }: Da
                       <h4 className={styles.dishName}>
                         {t(dish.name, locale)}
                       </h4>
-                      {dish.price && (
-                        <span className={styles.dishPrice}>{dish.price}</span>
+                      {dish.price != null && dish.price !== '' && (
+                        <span className={styles.dishPrice}>
+                          {formatDishPrice(dish.price)}
+                        </span>
                       )}
                     </div>
                     {dish.description && (

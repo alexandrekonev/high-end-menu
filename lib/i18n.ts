@@ -63,7 +63,7 @@ export const UI_STRINGS = {
     notActiveYet: 'Менюто не е активно в момента',
     validFrom: 'Валидно от',
     validUntil: 'до',
-    chefNote: 'Забележка на шефа',
+    chefNote: 'Описание от Шефа',
   },
   en: {
     title: 'The High-End Bar',
@@ -88,7 +88,7 @@ export const UI_STRINGS = {
     notActiveYet: 'This menu is not active at the moment',
     validFrom: 'Valid from',
     validUntil: 'to',
-    chefNote: 'Chef\'s Note',
+    chefNote: "Chef's Description",
   },
 }
 

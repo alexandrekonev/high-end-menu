@@ -37,15 +37,45 @@
   color: var(--silver);
 }
 
-.chefNote {
-  padding: 1rem;
-  background-color: rgba(132, 93, 65, 0.15);
+/* ── Chef's Description block ── */
+.chefDesc {
+  padding: 1.1rem 1.2rem;
+  background-color: rgba(132, 93, 65, 0.12);
   border-left: 3px solid var(--copper);
   border-radius: 4px;
+}
+
+.chefDescLabel {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--copper-lt);
+  margin: 0 0 0.6rem;
+}
+
+.chefDescBody {
   font-family: 'Open Sans', sans-serif;
   font-size: 0.9rem;
   color: var(--silver);
-  font-style: italic;
+  line-height: 1.6;
+}
+
+.chefDescPara {
+  margin: 0 0 0.4rem;
+}
+
+.chefDescPara:last-child {
+  margin-bottom: 0;
+}
+
+.chefDescList {
+  margin: 0.2rem 0 0.4rem 1.2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .notActive {

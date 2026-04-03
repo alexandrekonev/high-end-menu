@@ -43,19 +43,22 @@ export default defineType({
     }),
     defineField({
       name: 'chefNote',
-      title: "Chef's Note",
-      description: 'Short message from the chef — supports bold and italic',
+      title: 'Описание от Шефа',
+      description: 'Свободен текст — поддържа удебелен, курсив и списъци. Всеки ред/параграф е на нов ред на менюто.',
       type: 'object',
       fields: [
         {
           name: 'bg',
-          title: 'Bulgarian',
+          title: 'Български',
           type: 'array',
           of: [
             {
               type: 'block',
               styles: [{ title: 'Normal', value: 'normal' }],
-              lists: [],
+              lists: [
+                { title: 'Bullet', value: 'bullet' },
+                { title: 'Numbered', value: 'number' },
+              ],
               marks: {
                 decorators: [
                   { title: 'Bold', value: 'strong' },
@@ -74,7 +77,10 @@ export default defineType({
             {
               type: 'block',
               styles: [{ title: 'Normal', value: 'normal' }],
-              lists: [],
+              lists: [
+                { title: 'Bullet', value: 'bullet' },
+                { title: 'Numbered', value: 'number' },
+              ],
               marks: {
                 decorators: [
                   { title: 'Bold', value: 'strong' },
@@ -125,6 +131,18 @@ export default defineType({
                   type: 'object',
                   name: 'dish',
                   title: 'Dish',
+                  preview: {
+                    select: {
+                      title: 'name.bg',
+                      subtitle: 'price',
+                    },
+                    prepare({ title, subtitle }: { title?: string; subtitle?: number }) {
+                      return {
+                        title: title || '—',
+                        subtitle: subtitle != null ? `€ ${Number(subtitle).toFixed(2)}` : '',
+                      }
+                    },
+                  },
                   fields: [
                     {
                       name: 'name',
@@ -164,8 +182,9 @@ export default defineType({
                     },
                     {
                       name: 'price',
-                      title: 'Price',
-                      type: 'string',
+                      title: 'Цена (EUR, цяло число)',
+                      description: 'Въведи цяло число — напр. 12. Системата показва € 12.00 и стойността в лева.',
+                      type: 'number',
                     },
                     {
                       name: 'tags',
