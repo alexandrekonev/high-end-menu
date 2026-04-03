@@ -121,11 +121,12 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: rgba(28, 45, 54, 0.5);
   border: 1px solid var(--divider);
   border-radius: 4px;
-  overflow: hidden;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  overflow: visible;           /* allow image to expand on hover */
+  transition: border-color 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .dish:hover {
@@ -133,18 +134,34 @@
   background-color: rgba(132, 93, 65, 0.08);
 }
 
+/* Dish body — left */
+.dishBody {
+  order: 1;
+  padding: 0.85rem 1rem;
+  flex: 1;
+  min-width: 0;
+  background-color: rgba(28, 45, 54, 0.5);
+  border-radius: 4px 0 0 4px;
+  overflow: hidden;
+}
+
+/* Dish image — RIGHT */
 .dishImageWrapper {
+  order: 2;
   width: 88px;
   flex-shrink: 0;
-  overflow: hidden;
-  background-color: rgba(14, 22, 27, 0.7);
-  border-right: 1px solid var(--divider);
-  border-radius: 3px 0 0 3px;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  background-color: rgba(12, 20, 25, 0.9);
+  border-left: 1px solid var(--divider);
+  border-radius: 0 4px 4px 0;
+  z-index: 1;
+  clip-path: inset(0 0 0 0 round 0 4px 4px 0);
+  transition: clip-path 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dish:hover .dishImageWrapper {
-  width: min(50vw, 260px);
+  clip-path: inset(-300px 0 -300px -600px round 0px);
+  z-index: 20;
 }
 
 .dishImage {
@@ -152,12 +169,13 @@
   height: 100%;
   object-fit: contain;
   display: block;
+  transform-origin: right center;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgba(12, 20, 25, 0.9);
 }
 
-.dishBody {
-  padding: 0.85rem 1rem;
-  flex: 1;
-  min-width: 0;
+.dish:hover .dishImage {
+  transform: scale(3.5);
 }
 
 .dishHeader {
