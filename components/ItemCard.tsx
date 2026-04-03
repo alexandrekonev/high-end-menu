@@ -1,14 +1,15 @@
-import Image from 'next/image'
-import { Locale, t, isNew } from '@/lib/i18n'
+import { Locale, t, isNew, toEur } from '@/lib/i18n'
 import { MenuItemData } from './MenuShell'
 import styles from './ItemCard.module.css'
 
 interface ItemCardProps {
   item: MenuItemData
   locale: Locale
+  showPriceBgn?: boolean
+  showPriceEur?: boolean
 }
 
-export default function ItemCard({ item, locale }: ItemCardProps) {
+export default function ItemCard({ item, locale, showPriceBgn = true, showPriceEur = true }: ItemCardProps) {
   const isNewItem = isNew(item._createdAt)
 
   const tagLabels: { [key: string]: string } = {
@@ -67,9 +68,12 @@ export default function ItemCard({ item, locale }: ItemCardProps) {
         )}
 
         {/* Price */}
-        <div className={styles.priceSection}>
-          <span className={styles.price}>{item.price}</span>
-        </div>
+        {(showPriceBgn || showPriceEur) && (
+          <div className={styles.priceSection}>
+            {showPriceEur && <span className={styles.priceEur}>€ {toEur(item.price)}</span>}
+            {showPriceBgn && <span className={styles.price}>{item.price} лв.</span>}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -120,15 +120,25 @@
   border-top: 1px solid var(--divider);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+  gap: 0.5rem;
 }
 
-.price {
+.priceEur {
   font-family: 'Cormorant SC', serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--copper);
   font-weight: 600;
   letter-spacing: 0.05em;
+}
+
+.price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  color: var(--silver);
+  font-weight: 400;
+  opacity: 0.75;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {

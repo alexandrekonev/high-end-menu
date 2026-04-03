@@ -5,6 +5,8 @@ export const settingsQuery = `
     happyHourUntil,
     happyHourText,
     lunchMenuActive,
+    showPriceBgn,
+    showPriceEur,
     address,
     footerNote
   }
@@ -14,7 +16,7 @@ export const categoriesQuery = `
   *[_type == "category" && isActive == true] | order(order asc) {
     _id,
     name,
-    slug,
+    "slug": slug.current,
     icon,
     displayStyle
   }

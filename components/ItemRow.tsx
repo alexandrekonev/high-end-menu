@@ -1,4 +1,4 @@
-import { Locale, t } from '@/lib/i18n'
+import { Locale, t, toEur } from '@/lib/i18n'
 import { MenuItemData } from './MenuShell'
 import styles from './ItemRow.module.css'
 
@@ -6,9 +6,11 @@ interface ItemRowProps {
   item: MenuItemData
   locale: Locale
   compact?: boolean
+  showPriceBgn?: boolean
+  showPriceEur?: boolean
 }
 
-export default function ItemRow({ item, locale, compact = false }: ItemRowProps) {
+export default function ItemRow({ item, locale, compact = false, showPriceBgn = true, showPriceEur = true }: ItemRowProps) {
   const tagLabels: { [key: string]: string } = {
     vegetarian: locale === 'bg' ? 'Вегетариански' : 'Vegetarian',
     vegan: locale === 'bg' ? 'Веган' : 'Vegan',
@@ -35,7 +37,12 @@ export default function ItemRow({ item, locale, compact = false }: ItemRowProps)
       <div className={styles.mainContent}>
         <div className={styles.header}>
           <h4 className={styles.name}>{t(item.name, locale)}</h4>
-          <span className={styles.price}>{item.price}</span>
+          {(showPriceBgn || showPriceEur) && (
+            <div className={styles.priceGroup}>
+              {showPriceEur && <span className={styles.priceEur}>€ {toEur(item.price)}</span>}
+              {showPriceBgn && <span className={styles.price}>{item.price} лв.</span>}
+            </div>
+          )}
         </div>
 
         {item.description && (

@@ -4,6 +4,12 @@ export default defineType({
   name: 'category',
   title: 'Category',
   type: 'document',
+  preview: {
+    select: {
+      title: 'name.bg',
+      subtitle: 'displayStyle',
+    },
+  },
   fields: [
     defineField({
       name: 'name',

@@ -95,3 +95,19 @@ export const UI_STRINGS = {
 export function ui_t(key: keyof typeof UI_STRINGS.bg, locale: Locale): string {
   return UI_STRINGS[locale][key] || ''
 }
+
+// BGN is fixed to EUR at 1.95583 (Bulgarian Currency Board)
+const BGN_TO_EUR = 1.95583
+
+/**
+ * Converts a BGN price string to EUR.
+ * Handles formats like "8", "12.50", "12 / 55", "8лв", etc.
+ * Returns e.g. "4.09" or "6.14 / 28.12"
+ */
+export function toEur(priceBgn: string): string {
+  return priceBgn.replace(/\d+([.,]\d+)?/g, (match) => {
+    const num = parseFloat(match.replace(',', '.'))
+    if (isNaN(num)) return match
+    return (num / BGN_TO_EUR).toFixed(2)
+  })
+}

@@ -47,6 +47,20 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'showPriceBgn',
+      title: 'Show prices in BGN (лв.)',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Show prices in Bulgarian Lev',
+    }),
+    defineField({
+      name: 'showPriceEur',
+      title: 'Show prices in EUR (€)',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Show prices in Euro (auto-converted at fixed rate 1.95583)',
+    }),
+    defineField({
       name: 'address',
       title: 'Address',
       type: 'string',

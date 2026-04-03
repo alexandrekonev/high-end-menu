@@ -5,7 +5,7 @@ import {
   settingsQuery,
   todayMenuQuery,
 } from '@/sanity/lib/queries'
-import { MenuShell, CategoryData, MenuItemData } from '@/components/MenuShell'
+import MenuShell, { CategoryData, MenuItemData } from '@/components/MenuShell'
 
 export const revalidate = 60
 

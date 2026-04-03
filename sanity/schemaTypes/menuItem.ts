@@ -4,6 +4,12 @@ export default defineType({
   name: 'menuItem',
   title: 'Menu Item',
   type: 'document',
+  preview: {
+    select: {
+      title: 'name.bg',
+      subtitle: 'price',
+    },
+  },
   fields: [
     defineField({
       name: 'name',
