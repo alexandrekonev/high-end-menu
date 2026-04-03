@@ -43,4 +43,4 @@
 .volume { font-size: 9px; color: var(--warm-gray); }
 
 /* ── Allergens ── */
-.allergens { font-size: 9px; color: rgba(153,167,1
+.allergens { font-size: 9px; color: rgba(153,167,167,.5); margin-top: 5px; }

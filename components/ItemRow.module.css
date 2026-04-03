@@ -39,4 +39,6 @@
 .inlineNew  { font-size: 10px; }
 .inlineFeat { font-size: 10px; }
 .smallTag { font-size: 11px; margin-left: 3px; }
-.compactRight { text-align: rig
+.compactRight { text-align: right; flex-shrink: 0; }
+.compactRight .price { font-family: var(--font-sc); font-size: 15px; color: var(--copper-lt); display: block; }
+.compactRight .vol { font-size: 9px; color: var(--warm-gray); display: block; }
