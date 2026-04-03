@@ -4,9 +4,10 @@ import styles from './DailyMenuSection.module.css'
 interface DailyMenuSectionProps {
   menu: any
   locale: Locale
+  hideTitle?: boolean
 }
 
-export default function DailyMenuSection({ menu, locale }: DailyMenuSectionProps) {
+export default function DailyMenuSection({ menu, locale, hideTitle = false }: DailyMenuSectionProps) {
   if (!menu) {
     return null
   }
@@ -19,7 +20,7 @@ export default function DailyMenuSection({ menu, locale }: DailyMenuSectionProps
   return (
     <section className={styles.section}>
       <div className={styles.header}>
-        <h2 className={styles.title}>{ui_t('lunchMenu', locale)}</h2>
+        {!hideTitle && <h2 className={styles.title}>{ui_t('lunchMenu', locale)}</h2>}
         <div className={styles.timeWindow}>
           <span className={styles.timeLabel}>{ui_t('validFrom', locale)}:</span>
           <span className={styles.time}>{menu.validFrom}</span>
