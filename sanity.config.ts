@@ -63,4 +63,6 @@ export default defineConfig({
           ]),
     }),
 
-    deeplTranslatePlugin
+    deeplTranslatePlugin(),
+  ],
+})

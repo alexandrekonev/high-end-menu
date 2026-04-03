@@ -245,4 +245,13 @@
 .footerAddress {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  fo
+  font-size: 11px;
+  opacity: 0.65;
+  margin-top: 3px;
+}
+.footerNote {
+  font-size: 10px;
+  opacity: 0.5;
+  margin-top: 8px;
+  letter-spacing: 0.05em;
+}

@@ -132,4 +132,10 @@ async function migrate() {
     log(`Patched : ${patched}`)
     log(`Skipped : ${skipped}`)
     log(`Tx ID   : ${result.transactionId}`)
-  } catch
+  } catch (err) {
+    console.error('Migration failed:', err)
+    process.exit(1)
+  }
+}
+
+main()

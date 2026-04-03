@@ -44,4 +44,5 @@ body {
 }
 img { display: block; width: 100%; object-fit: cover; }
 a { text-decoration: none; color: inherit; }
-butt
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+input, textarea, select { font-family: inherit; }
