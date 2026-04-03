@@ -44,17 +44,46 @@ export default defineType({
     defineField({
       name: 'chefNote',
       title: "Chef's Note",
+      description: 'Short message from the chef — supports bold and italic',
       type: 'object',
       fields: [
         {
           name: 'bg',
           title: 'Bulgarian',
-          type: 'string',
+          type: 'array',
+          of: [
+            {
+              type: 'block',
+              styles: [{ title: 'Normal', value: 'normal' }],
+              lists: [],
+              marks: {
+                decorators: [
+                  { title: 'Bold', value: 'strong' },
+                  { title: 'Italic', value: 'em' },
+                ],
+                annotations: [],
+              },
+            },
+          ],
         },
         {
           name: 'en',
           title: 'English',
-          type: 'string',
+          type: 'array',
+          of: [
+            {
+              type: 'block',
+              styles: [{ title: 'Normal', value: 'normal' }],
+              lists: [],
+              marks: {
+                decorators: [
+                  { title: 'Bold', value: 'strong' },
+                  { title: 'Italic', value: 'em' },
+                ],
+                annotations: [],
+              },
+            },
+          ],
         },
       ],
     }),

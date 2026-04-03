@@ -1,5 +1,17 @@
+import { PortableText, PortableTextComponents } from '@portabletext/react'
 import { Locale, t, ui_t, isWithinTimeWindow } from '@/lib/i18n'
 import styles from './DailyMenuSection.module.css'
+
+// Minimal components for the Chef's Note portable text
+const chefNoteComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => <span>{children}</span>,
+  },
+  marks: {
+    strong: ({ children }) => <strong>{children}</strong>,
+    em:     ({ children }) => <em>{children}</em>,
+  },
+}
 
 interface DailyMenuSectionProps {
   menu: any
@@ -32,7 +44,14 @@ export default function DailyMenuSection({ menu, locale, hideTitle = false }: Da
       {menu.chefNote && (
         <div className={styles.chefNote}>
           <strong>{ui_t('chefNote', locale)}:</strong>{' '}
-          {t(menu.chefNote, locale)}
+          {Array.isArray(menu.chefNote?.[locale] ?? menu.chefNote?.bg) ? (
+            <PortableText
+              value={menu.chefNote[locale] ?? menu.chefNote.bg}
+              components={chefNoteComponents}
+            />
+          ) : (
+            t(menu.chefNote, locale)
+          )}
         </div>
       )}
 

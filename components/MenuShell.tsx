@@ -134,20 +134,6 @@ export default function MenuShell({
     <div className={styles.container}>
       {/* Header */}
       <header className={styles.header}>
-        {/* Top bar with language toggle */}
-        <div className={styles.topBar}>
-          <div className={styles.topBarInner}>
-            <a
-              href={locale === 'bg' ? '/menu' : '/menu'}
-              className={`${styles.langBtn} ${locale === 'bg' ? styles.langActive : ''}`}
-            >БГ</a>
-            <span className={styles.langSep}>|</span>
-            <a
-              href={locale === 'bg' ? '/menu/en' : '/menu'}
-              className={`${styles.langBtn} ${locale === 'en' ? styles.langActive : ''}`}
-            >EN</a>
-          </div>
-        </div>
         {/* Hero section: emblem on top, text logo below */}
         <div className={styles.hero}>
           <img
@@ -160,6 +146,18 @@ export default function MenuShell({
             alt="The High-End Bar"
             className={styles.heroLogo}
           />
+          {/* Language toggle — centred below the logo */}
+          <div className={styles.langToggle}>
+            <a
+              href="/menu"
+              className={`${styles.langBtn} ${locale === 'bg' ? styles.langActive : ''}`}
+            >БГ</a>
+            <span className={styles.langSep}>|</span>
+            <a
+              href="/menu/en"
+              className={`${styles.langBtn} ${locale === 'en' ? styles.langActive : ''}`}
+            >EN</a>
+          </div>
         </div>
       </header>
 
