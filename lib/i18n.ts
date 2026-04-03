@@ -1,114 +1,97 @@
 export type Locale = 'bg' | 'en'
 
-export const ui = {
-  bg: {
-    // Nav
-    menu: 'Меню',
-    lunchMenu: 'Обедно меню',
-    langSwitch: 'EN',
-    // Lunch
-    lunchTitle: 'Обедно меню',
-    lunchActive: 'Обедното меню е активно',
-    lunchInactive: 'Обедното меню не е активно в момента',
-    lunchHours: 'Работи от {from} до {until}',
-    // Happy hour
-    happyHour: 'Happy Hour',
-    // Tags
-    tag_vegetarian: '🌱 Вегетарианско',
-    tag_vegan: '🌿 Веган',
-    tag_gluten_free: '🌾 Без глутен',
-    tag_spicy: '🌶 Пикантно',
-    tag_premium: '⭐ Premium',
-    tag_special: '⭐ Специалитет',
-    tag_featured: '⚡ Препоръчано',
-    tag_new: '🆕 Ново',
-    // Allergens
-    allergens: 'Алергени',
-    allergen_gluten: 'Глутен',
-    allergen_eggs: 'Яйца',
-    allergen_milk: 'Мляко',
-    allergen_nuts: 'Ядки',
-    allergen_peanuts: 'Фъстъци',
-    allergen_soy: 'Соя',
-    allergen_sulphites: 'Серен диоксид',
-    allergen_fish: 'Риба',
-    allergen_shellfish: 'Морски дарове',
-    allergen_sesame: 'Сусам',
-    allergen_celery: 'Целина',
-    allergen_mustard: 'Синап',
-    // Footer
-    scanQr: 'Сканирай QR кода',
-    copyright: '© The High-End Bar. Всички права запазени.',
-  },
-  en: {
-    menu: 'Menu',
-    lunchMenu: "Today's Lunch",
-    langSwitch: 'BG',
-    lunchTitle: "Today's Lunch Menu",
-    lunchActive: 'Lunch menu is now active',
-    lunchInactive: 'Lunch menu is not active right now',
-    lunchHours: 'Served from {from} to {until}',
-    happyHour: 'Happy Hour',
-    tag_vegetarian: '🌱 Vegetarian',
-    tag_vegan: '🌿 Vegan',
-    tag_gluten_free: '🌾 Gluten-free',
-    tag_spicy: '🌶 Spicy',
-    tag_premium: '⭐ Premium',
-    tag_special: '⭐ Special',
-    tag_featured: '⚡ Recommended',
-    tag_new: '🆕 New',
-    allergens: 'Allergens',
-    allergen_gluten: 'Gluten',
-    allergen_eggs: 'Eggs',
-    allergen_milk: 'Milk',
-    allergen_nuts: 'Nuts',
-    allergen_peanuts: 'Peanuts',
-    allergen_soy: 'Soy',
-    allergen_sulphites: 'Sulphites',
-    allergen_fish: 'Fish',
-    allergen_shellfish: 'Shellfish',
-    allergen_sesame: 'Sesame',
-    allergen_celery: 'Celery',
-    allergen_mustard: 'Mustard',
-    scanQr: 'Scan QR code',
-    copyright: '© The High-End Bar. All rights reserved.',
-  },
-} as const
+export interface LocalizedField {
+  bg?: string | null
+  en?: string | null
+}
 
-export type UIKey = keyof typeof ui.bg
-
-/** Pick the right locale string from a { bg, en } object */
 export function t(
-  field: { bg?: string | null; en?: string | null } | null | undefined,
+  field: LocalizedField | null | undefined,
   locale: Locale
 ): string {
   if (!field) return ''
-  if (locale === 'en') return field.en || field.bg || ''
-  return field.bg || ''
-}
-
-/** Get a UI string by key */
-export function ui_t(key: UIKey, locale: Locale, vars?: Record<string, string>): string {
-  let str = (ui[locale] as Record<string, string>)[key] ?? (ui.bg as Record<string, string>)[key] ?? key
-  if (vars) {
-    Object.entries(vars).forEach(([k, v]) => { str = str.replace(`{${k}}`, v) })
+  if (locale === 'bg') {
+    return field.bg || field.en || ''
   }
-  return str
+  return field.en || field.bg || ''
 }
 
-/** Is an item "new" (created < 14 days ago)? */
-export function isNew(createdAt: string): boolean {
-  const ms = Date.now() - new Date(createdAt).getTime()
-  return ms < 14 * 24 * 60 * 60 * 1000
-}
-
-/** Is current time within HH:MM–HH:MM window? */
 export function isWithinTimeWindow(from: string, until: string): boolean {
   const now = new Date()
-  const [fh, fm] = from.split(':').map(Number)
-  const [uh, um] = until.split(':').map(Number)
-  const nowMins = now.getHours() * 60 + now.getMinutes()
-  const fromMins = fh * 60 + fm
-  const untilMins = uh * 60 + um
-  return nowMins >= fromMins && nowMins < untilMins
+  const currentHours = now.getHours()
+  const currentMinutes = now.getMinutes()
+  const currentTime = currentHours * 60 + currentMinutes
+
+  const [fromH, fromM] = from.split(':').map(Number)
+  const fromTime = fromH * 60 + fromM
+
+  const [untilH, untilM] = until.split(':').map(Number)
+  const untilTime = untilH * 60 + untilM
+
+  return currentTime >= fromTime && currentTime < untilTime
+}
+
+export function isNew(createdAt: string): boolean {
+  const created = new Date(createdAt)
+  const now = new Date()
+  const diffMs = now.getTime() - created.getTime()
+  const diffDays = diffMs / (1000 * 60 * 60 * 24)
+  return diffDays < 14
+}
+
+export const UI_STRINGS = {
+  bg: {
+    title: 'The High‑End Bar',
+    menu: 'Меню',
+    happyHour: 'Щастлив час',
+    lunchMenu: 'Меню за обед',
+    language: 'EN',
+    back: 'Назад',
+    price: 'Цена',
+    volume: 'Обем',
+    allergens: 'Алергени',
+    notAvailable: 'Недостъпно',
+    vegetarian: 'Вегетариански',
+    vegan: 'Веган',
+    glutenFree: 'Без глутен',
+    spicy: 'Острo',
+    premium: 'Premium',
+    featured: 'Препоръчано',
+    address: 'Адрес',
+    copyright: 'Всички права запазени',
+    new: 'НОВО',
+    notActiveYet: 'Менюто не е активно в момента',
+    validFrom: 'Валидно от',
+    validUntil: 'до',
+    chefNote: 'Забележка на шефа',
+  },
+  en: {
+    title: 'The High-End Bar',
+    menu: 'Menu',
+    happyHour: 'Happy Hour',
+    lunchMenu: 'Lunch Menu',
+    language: 'BG',
+    back: 'Back',
+    price: 'Price',
+    volume: 'Volume',
+    allergens: 'Allergens',
+    notAvailable: 'Not Available',
+    vegetarian: 'Vegetarian',
+    vegan: 'Vegan',
+    glutenFree: 'Gluten-Free',
+    spicy: 'Spicy',
+    premium: 'Premium',
+    featured: 'Featured',
+    address: 'Address',
+    copyright: 'All rights reserved',
+    new: 'NEW',
+    notActiveYet: 'This menu is not active at the moment',
+    validFrom: 'Valid from',
+    validUntil: 'to',
+    chefNote: 'Chef\'s Note',
+  },
+}
+
+export function ui_t(key: keyof typeof UI_STRINGS.bg, locale: Locale): string {
+  return UI_STRINGS[locale][key] || ''
 }

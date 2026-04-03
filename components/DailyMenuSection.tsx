@@ -1,120 +1,85 @@
-'use client'
+import { Locale, t, ui_t, isWithinTimeWindow } from '@/lib/i18n'
+import styles from './DailyMenuSection.module.css'
 
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
-import { t, ui_t, isWithinTimeWindow, type Locale } from '@/lib/i18n'
-import s from './DailyMenuSection.module.css'
-
-interface Dish {
-  name: { bg?: string; en?: string }
-  description?: { bg?: string; en?: string }
-  price?: string
-  tags?: string[]
-  image?: string
-}
-
-interface Section {
-  heading: { bg?: string; en?: string }
-  dishes: Dish[]
-}
-
-interface Props {
-  menu: {
-    validFrom: string
-    validUntil: string
-    chefNote?: { bg?: string; en?: string }
-    sections: Section[]
-  }
+interface DailyMenuSectionProps {
+  menu: any
   locale: Locale
 }
 
-const TAG_ICONS: Record<string, string> = {
-  vegetarian: '🌱', vegan: '🌿', 'gluten-free': '🌾', special: '⭐',
-}
+export default function DailyMenuSection({ menu, locale }: DailyMenuSectionProps) {
+  if (!menu) {
+    return null
+  }
 
-export default function DailyMenuSection({ menu, locale }: Props) {
-  const [active, setActive] = useState(false)
-
-  // Check time window every 30 seconds
-  useEffect(() => {
-    const check = () => setActive(isWithinTimeWindow(menu.validFrom, menu.validUntil))
-    check()
-    const id = setInterval(check, 30_000)
-    return () => clearInterval(id)
-  }, [menu.validFrom, menu.validUntil])
-
-  const chefNote = t(menu.chefNote, locale)
+  const isActive = isWithinTimeWindow(
+    menu.validFrom || '12:00',
+    menu.validUntil || '15:00'
+  )
 
   return (
-    <div className={s.wrapper}>
-      {/* ── Header ── */}
-      <div className={s.header}>
-        <div className={s.headerIcon}>🍽</div>
-        <div>
-          <div className={s.title}>{ui_t('lunchTitle', locale)}</div>
-          <div className={s.hours}>
-            {ui_t('lunchHours', locale, { from: menu.validFrom, until: menu.validUntil })}
-          </div>
-        </div>
-        <div className={`${s.pill} ${active ? s.pillActive : s.pillInactive}`}>
-          {active ? ui_t('lunchActive', locale) : ui_t('lunchInactive', locale)}
+    <section className={styles.section}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>{ui_t('lunchMenu', locale)}</h2>
+        <div className={styles.timeWindow}>
+          <span className={styles.timeLabel}>{ui_t('validFrom', locale)}:</span>
+          <span className={styles.time}>{menu.validFrom}</span>
+          <span className={styles.timeLabel}>{ui_t('validUntil', locale)}:</span>
+          <span className={styles.time}>{menu.validUntil}</span>
         </div>
       </div>
 
-      {/* Inactive state */}
-      {!active && (
-        <div className={s.inactive}>
-          <span className={s.inactiveIcon}>⏰</span>
-          <p>{ui_t('lunchInactive', locale)}</p>
-          <p className={s.inactiveHours}>
-            {ui_t('lunchHours', locale, { from: menu.validFrom, until: menu.validUntil })}
-          </p>
+      {menu.chefNote && (
+        <div className={styles.chefNote}>
+          <strong>{ui_t('chefNote', locale)}:</strong>{' '}
+          {t(menu.chefNote, locale)}
         </div>
       )}
 
-      {/* Chef's note */}
-      {active && chefNote && (
-        <div className={s.chefNote}>
-          <span className={s.chefNoteIcon}>👨‍🍳</span> {chefNote}
+      {!isActive && (
+        <div className={styles.notActive}>
+          {ui_t('notActiveYet', locale)}
         </div>
       )}
 
-      {/* Sections */}
-      {active && menu.sections.map((section, si) => (
-        <div key={si} className={s.section}>
-          <div className={s.sectionHeading}>{t(section.heading, locale)}</div>
-          <div className={s.dishes}>
-            {section.dishes.map((dish, di) => (
-              <div key={di} className={s.dish}>
-                {/* Photo */}
-                {dish.image && (
-                  <div className={s.dishPhoto}>
-                    <Image src={dish.image} alt={t(dish.name, locale)} fill sizes="80px" className={s.dishImg} />
-                  </div>
-                )}
-
-                <div className={s.dishInfo}>
-                  <div className={s.dishName}>{t(dish.name, locale)}</div>
-                  {dish.description && (
-                    <div className={s.dishDesc}>{t(dish.description, locale)}</div>
-                  )}
-                  {dish.tags && dish.tags.length > 0 && (
-                    <div className={s.dishTags}>
-                      {dish.tags.map((tag) => (
-                        <span key={tag} className={s.dishTag}>{TAG_ICONS[tag] ?? tag}</span>
-                      ))}
+      {isActive && menu.sections && (
+        <div className={styles.sections}>
+          {menu.sections.map((section: any, idx: number) => (
+            <div key={idx} className={styles.sectionGroup}>
+              <h3 className={styles.sectionHeading}>
+                {t(section.heading, locale)}
+              </h3>
+              <div className={styles.dishes}>
+                {section.dishes && section.dishes.map((dish: any, dishIdx: number) => (
+                  <div key={dishIdx} className={styles.dish}>
+                    <div className={styles.dishHeader}>
+                      <h4 className={styles.dishName}>
+                        {t(dish.name, locale)}
+                      </h4>
+                      {dish.price && (
+                        <span className={styles.dishPrice}>{dish.price}</span>
+                      )}
                     </div>
-                  )}
-                </div>
-
-                {dish.price && (
-                  <div className={s.dishPrice}>{dish.price} €</div>
-                )}
+                    {dish.description && (
+                      <p className={styles.dishDescription}>
+                        {t(dish.description, locale)}
+                      </p>
+                    )}
+                    {dish.tags && dish.tags.length > 0 && (
+                      <div className={styles.tags}>
+                        {dish.tags.map((tag: string) => (
+                          <span key={tag} className={styles.tag}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      )}
+    </section>
   )
 }

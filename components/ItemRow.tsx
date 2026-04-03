@@ -1,71 +1,72 @@
-import Image from 'next/image'
-import { t, ui_t, isNew, type Locale } from '@/lib/i18n'
-import type { MenuItemData } from './MenuShell'
-import s from './ItemRow.module.css'
+import { Locale, t } from '@/lib/i18n'
+import { MenuItemData } from './MenuShell'
+import styles from './ItemRow.module.css'
 
-interface Props { item: MenuItemData; locale: Locale; compact?: boolean }
-
-const TAG_ICONS: Record<string, string> = {
-  vegetarian: '🌱', vegan: '🌿', 'gluten-free': '🌾', spicy: '🌶', premium: '⭐',
+interface ItemRowProps {
+  item: MenuItemData
+  locale: Locale
+  compact?: boolean
 }
 
-export default function ItemRow({ item, locale, compact = false }: Props) {
-  const novel = isNew(item._createdAt)
-  const name = t(item.name, locale)
-  const desc = t(item.description, locale)
-
-  if (compact) {
-    return (
-      <div className={s.compact}>
-        <div className={s.compactInfo}>
-          <span className={s.compactName}>
-            {name}
-            {novel && <span className={s.inlineNew}> 🆕</span>}
-            {item.isFeatured && <span className={s.inlineFeat}> ⚡</span>}
-          </span>
-          {desc && <span className={s.compactDesc}>{desc}</span>}
-          {item.tags?.map((tag) => <span key={tag} className={s.smallTag}>{TAG_ICONS[tag]}</span>)}
-        </div>
-        <div className={s.compactRight}>
-          <span className={s.price}>{item.price} €</span>
-          {item.volume && <span className={s.vol}>{item.volume}</span>}
-        </div>
-      </div>
-    )
+export default function ItemRow({ item, locale, compact = false }: ItemRowProps) {
+  const tagLabels: { [key: string]: string } = {
+    vegetarian: locale === 'bg' ? 'Вегетариански' : 'Vegetarian',
+    vegan: locale === 'bg' ? 'Веган' : 'Vegan',
+    'gluten-free': locale === 'bg' ? 'Без глутен' : 'Gluten-Free',
+    spicy: locale === 'bg' ? 'Остро' : 'Spicy',
+    premium: 'Premium',
+    featured: locale === 'bg' ? 'Препоръчано' : 'Featured',
   }
 
   return (
-    <div className={s.row}>
-      {/* Thumbnail — само ако е въведена снимка */}
+    <div className={`${styles.row} ${compact ? styles.compact : ''}`}>
+      {/* Optional Image Thumbnail */}
       {item.image && (
-        <div className={s.thumb}>
-          <Image src={item.image} alt={name} fill sizes="64px" className={s.thumbImg} />
+        <div className={styles.thumbnail}>
+          <img
+            src={item.image}
+            alt={t(item.name, locale)}
+            className={styles.image}
+          />
         </div>
       )}
 
-      <div className={s.info}>
-        <div className={s.nameRow}>
-          <span className={s.name}>{name}</span>
-          {novel && <span className={`${s.badge} ${s.badgeNew}`}>{ui_t('tag_new', locale)}</span>}
-          {item.isFeatured && <span className={`${s.badge} ${s.badgeFeat}`}>{ui_t('tag_featured', locale)}</span>}
+      {/* Main Content */}
+      <div className={styles.mainContent}>
+        <div className={styles.header}>
+          <h4 className={styles.name}>{t(item.name, locale)}</h4>
+          <span className={styles.price}>{item.price}</span>
         </div>
-        {item.subCategory && <div className={s.origin}>{item.subCategory}</div>}
-        {desc && <div className={s.desc}>{desc}</div>}
-        {item.tags && item.tags.length > 0 && (
-          <div className={s.tags}>
-            {item.tags.map((tag) => <span key={tag} className={s.tag}>{TAG_ICONS[tag]}</span>)}
-          </div>
-        )}
-        {item.allergens && item.allergens.length > 0 && (
-          <div className={s.allergens}>
-            {ui_t('allergens', locale)}: {item.allergens.map((a) => ui_t(`allergen_${a}` as never, locale)).join(', ')}
-          </div>
-        )}
-      </div>
 
-      <div className={s.right}>
-        <span className={s.price}>{item.price} €</span>
-        {item.volume && <span className={s.vol}>{item.volume}</span>}
+        {item.description && (
+          <p className={styles.description}>{t(item.description, locale)}</p>
+        )}
+
+        {/* Volume & Tags */}
+        <div className={styles.meta}>
+          {item.volume && (
+            <span className={styles.volume}>
+              <span className={styles.label}>Vol:</span> {item.volume}
+            </span>
+          )}
+
+          {item.tags && item.tags.length > 0 && (
+            <div className={styles.tags}>
+              {item.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>
+                  {tagLabels[tag] || tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Allergens */}
+        {item.allergens && item.allergens.length > 0 && (
+          <div className={styles.allergens}>
+            <strong>⚠️</strong> {item.allergens.join(', ')}
+          </div>
+        )}
       </div>
     </div>
   )

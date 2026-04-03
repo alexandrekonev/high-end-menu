@@ -1,15 +1,16 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Redirect root → /menu (BG by default)
+  // Redirect root to /menu
   if (pathname === '/') {
     return NextResponse.redirect(new URL('/menu', request.url))
   }
+
+  return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|studio|api|menu|lunch).*)'],
+  matcher: ['/((?!_next|api|studio|menu|lunch|favicon).*)'],
 }

@@ -1,81 +1,67 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
-export const category = defineType({
+export default defineType({
   name: 'category',
-  title: 'Категория / Category',
+  title: 'Category',
   type: 'document',
-  icon: () => '📂',
   fields: [
     defineField({
       name: 'name',
-      title: 'Название',
+      title: 'Name',
       type: 'object',
       fields: [
-        { name: 'bg', title: '🇧🇬 Български', type: 'string', validation: (R) => R.required() },
-        { name: 'en', title: '🇬🇧 English', type: 'string' },
+        {
+          name: 'bg',
+          title: 'Bulgarian',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'en',
+          title: 'English',
+          type: 'string',
+        },
       ],
-      validation: (R) => R.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: { source: 'name.bg', maxLength: 48 },
-      validation: (R) => R.required(),
+      options: {
+        source: 'name.bg',
+      },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'icon',
-      title: 'Икона (emoji)',
+      title: 'Icon (Emoji)',
       type: 'string',
-      description: 'Един emoji — напр. ☕ 🍷 🥃 🍸',
-      validation: (R) => R.max(4),
-    }),
-    defineField({
-      name: 'group',
-      title: 'Група (за визуално разделяне)',
-      type: 'string',
-      options: {
-        list: [
-          { title: '☕ Топли напитки', value: 'hot' },
-          { title: '🧊 Студени безалкохолни', value: 'cold' },
-          { title: '🍷 Алкохолни напитки', value: 'alcohol' },
-          { title: '🍽 Храна', value: 'food' },
-        ],
-        layout: 'radio',
-      },
     }),
     defineField({
       name: 'displayStyle',
-      title: 'Стил на показване',
+      title: 'Display Style',
       type: 'string',
       options: {
         list: [
-          { title: '🃏 Карти (с/без снимка)', value: 'cards' },
-          { title: '📋 Списък с снимка', value: 'list' },
-          { title: '📄 Компактен списък', value: 'compact' },
+          { title: 'Cards (2-column grid)', value: 'cards' },
+          { title: 'List', value: 'list' },
+          { title: 'Compact', value: 'compact' },
         ],
-        layout: 'radio',
       },
-      initialValue: 'cards',
-    }),
-    defineField({
-      name: 'order',
-      title: 'Наредба (по-малкото — напред)',
-      type: 'number',
-      initialValue: 10,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'isActive',
-      title: 'Активна / Видима',
+      title: 'Active',
       type: 'boolean',
       initialValue: true,
     }),
+    defineField({
+      name: 'order',
+      title: 'Order',
+      type: 'number',
+      initialValue: 0,
+    }),
   ],
-  preview: {
-    select: { bg: 'name.bg', icon: 'icon', active: 'isActive' },
-    prepare({ bg, icon, active }) {
-      return { title: `${icon ?? '📂'} ${bg}`, subtitle: active ? 'активна' : '🚫 скрита' }
-    },
-  },
-  orderings: [{ title: 'Наредба', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],
 })

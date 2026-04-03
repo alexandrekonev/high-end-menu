@@ -1,32 +1,27 @@
-import { groq } from 'next-sanity'
-
-// ── Settings ────────────────────────────────────────────────────
-export const settingsQuery = groq`
+export const settingsQuery = `
   *[_type == "siteSettings"][0] {
     happyHourActive,
     happyHourFrom,
     happyHourUntil,
     happyHourText,
+    lunchMenuActive,
     address,
-    footerNote,
+    footerNote
   }
 `
 
-// ── Categories ──────────────────────────────────────────────────
-export const categoriesQuery = groq`
+export const categoriesQuery = `
   *[_type == "category" && isActive == true] | order(order asc) {
     _id,
     name,
-    "slug": slug.current,
+    slug,
     icon,
-    group,
-    displayStyle,
+    displayStyle
   }
 `
 
-// ── Menu Items ──────────────────────────────────────────────────
-export const menuItemsQuery = groq`
-  *[_type == "menuItem" && isAvailable == true] | order(category->order asc, order asc) {
+export const menuItemsQuery = `
+  *[_type == "menuItem" && isAvailable == true] | order(order asc) {
     _id,
     name,
     description,
@@ -37,21 +32,13 @@ export const menuItemsQuery = groq`
     allergens,
     subCategory,
     _createdAt,
-    "image": image.asset->url,
-    "imageHotspot": image.hotspot,
-    "imageCrop": image.crop,
-    "categorySlug": category->slug.current,
-    "categoryIcon": category->icon,
+    image,
+    "categorySlug": category->slug.current
   }
 `
 
-// ── Today's Daily Menu ───────────────────────────────────────────
-export const todayMenuQuery = groq`
-  *[
-    _type == "dailyMenu"
-    && date == $today
-    && isActive == true
-  ][0] {
+export const todayMenuQuery = `
+  *[_type == "dailyMenu" && date == $today && isActive == true][0] {
     _id,
     date,
     validFrom,
@@ -64,16 +51,8 @@ export const todayMenuQuery = groq`
         description,
         price,
         tags,
-        "image": image.asset->url,
-        "imageHotspot": image.hotspot,
+        image
       }
     }
-  }
-`
-
-// ── All Daily Menus (for Studio preview / archive) ──────────────
-export const allDailyMenusQuery = groq`
-  *[_type == "dailyMenu"] | order(date desc) {
-    _id, date, validFrom, validUntil, isActive,
   }
 `

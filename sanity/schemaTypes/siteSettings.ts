@@ -1,60 +1,72 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
-export const siteSettings = defineType({
+export default defineType({
   name: 'siteSettings',
-  title: 'Настройки на сайта',
+  title: 'Site Settings',
   type: 'document',
-  icon: () => '⚙️',
   fields: [
-    // Happy Hour
     defineField({
       name: 'happyHourActive',
-      title: '🍹 Happy Hour — Активен',
+      title: 'Happy Hour Active',
       type: 'boolean',
-      initialValue: true,
+      initialValue: false,
     }),
     defineField({
       name: 'happyHourFrom',
-      title: 'Happy Hour — от',
+      title: 'Happy Hour From (HH:MM)',
       type: 'string',
-      initialValue: '17:00',
-      description: 'Формат HH:MM',
-      hidden: ({ document }) => !document?.happyHourActive,
+      description: 'e.g. "17:00"',
     }),
     defineField({
       name: 'happyHourUntil',
-      title: 'Happy Hour — до',
+      title: 'Happy Hour Until (HH:MM)',
       type: 'string',
-      initialValue: '18:00',
-      hidden: ({ document }) => !document?.happyHourActive,
+      description: 'e.g. "18:00"',
     }),
     defineField({
       name: 'happyHourText',
-      title: 'Текст на Happy Hour банера',
+      title: 'Happy Hour Text',
       type: 'object',
       fields: [
-        { name: 'bg', title: '🇧🇬 Български', type: 'string', initialValue: 'Happy Hour — всичко от менюто с отстъпка!' },
-        { name: 'en', title: '🇬🇧 English', type: 'string', initialValue: 'Happy Hour — discount on everything!' },
+        {
+          name: 'bg',
+          title: 'Bulgarian',
+          type: 'string',
+        },
+        {
+          name: 'en',
+          title: 'English',
+          type: 'string',
+        },
       ],
-      hidden: ({ document }) => !document?.happyHourActive,
     }),
-
-    // Address / Info
+    defineField({
+      name: 'lunchMenuActive',
+      title: 'Lunch Menu Active',
+      type: 'boolean',
+      initialValue: false,
+    }),
     defineField({
       name: 'address',
-      title: 'Адрес',
+      title: 'Address',
       type: 'string',
-      initialValue: 'Realtons Place, бул. „Черни връх" 51Г, срещу Paradise Center, Sofia',
     }),
     defineField({
       name: 'footerNote',
-      title: 'Бележка в Footer',
+      title: 'Footer Note',
       type: 'object',
       fields: [
-        { name: 'bg', title: '🇧🇬', type: 'string', initialValue: 'Цените са с включен ДДС' },
-        { name: 'en', title: '🇬🇧', type: 'string', initialValue: 'All prices include VAT' },
+        {
+          name: 'bg',
+          title: 'Bulgarian',
+          type: 'string',
+        },
+        {
+          name: 'en',
+          title: 'English',
+          type: 'string',
+        },
       ],
     }),
   ],
-  preview: { prepare: () => ({ title: 'Site Settings' }) },
 })

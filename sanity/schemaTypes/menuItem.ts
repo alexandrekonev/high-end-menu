@@ -1,167 +1,118 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
-export const menuItem = defineType({
+export default defineType({
   name: 'menuItem',
-  title: 'Артикул / Menu Item',
+  title: 'Menu Item',
   type: 'document',
-  icon: () => '🍽',
   fields: [
-    // ── Names ──────────────────────────────────────
     defineField({
       name: 'name',
-      title: 'Название',
+      title: 'Name',
       type: 'object',
       fields: [
-        { name: 'bg', title: '🇧🇬 Български', type: 'string', validation: (R) => R.required() },
-        { name: 'en', title: '🇬🇧 English', type: 'string' },
+        {
+          name: 'bg',
+          title: 'Bulgarian',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'en',
+          title: 'English',
+          type: 'string',
+        },
       ],
-      validation: (R) => R.required(),
+      validation: (Rule) => Rule.required(),
     }),
-
-    // ── Description ────────────────────────────────
     defineField({
       name: 'description',
-      title: 'Описание / съставки',
+      title: 'Description',
       type: 'object',
       fields: [
-        { name: 'bg', title: '🇧🇬 Български', type: 'text', rows: 2 },
-        { name: 'en', title: '🇬🇧 English', type: 'text', rows: 2 },
+        {
+          name: 'bg',
+          title: 'Bulgarian',
+          type: 'string',
+        },
+        {
+          name: 'en',
+          title: 'English',
+          type: 'string',
+        },
       ],
     }),
-
-    // ── Price ──────────────────────────────────────
     defineField({
       name: 'price',
-      title: 'Цена (€)',
+      title: 'Price',
       type: 'string',
-      description: 'напр. "8" или "12 / 55" (чаша/бутилка)',
-      validation: (R) => R.required(),
+      description: 'e.g. "8" or "12 / 55"',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'volume',
-      title: 'Обем / порция',
+      title: 'Volume',
       type: 'string',
-      description: 'напр. "50ml", "250ml", "150ml / бутилка"',
+      description: 'e.g. "50ml"',
     }),
-
-    // ── Category ───────────────────────────────────
     defineField({
       name: 'category',
-      title: 'Категория',
+      title: 'Category',
       type: 'reference',
       to: [{ type: 'category' }],
-      validation: (R) => R.required(),
+      validation: (Rule) => Rule.required(),
     }),
-
-    // ── Image ──────────────────────────────────────
     defineField({
-      name: 'image',
-      title: 'Снимка (опционална)',
-      type: 'image',
-      options: { hotspot: true },
+      name: 'subCategory',
+      title: 'Sub Category',
+      type: 'string',
     }),
-
-    // ── Tags ───────────────────────────────────────
     defineField({
       name: 'tags',
-      title: 'Тагове',
+      title: 'Tags',
       type: 'array',
       of: [{ type: 'string' }],
       options: {
         list: [
-          { title: '🌱 Вегетарианско', value: 'vegetarian' },
-          { title: '🌿 Веган', value: 'vegan' },
-          { title: '🌾 Без глутен', value: 'gluten-free' },
-          { title: '🌶 Пикантно', value: 'spicy' },
-          { title: '⭐ Premium', value: 'premium' },
+          { title: 'Vegetarian', value: 'vegetarian' },
+          { title: 'Vegan', value: 'vegan' },
+          { title: 'Gluten-Free', value: 'gluten-free' },
+          { title: 'Spicy', value: 'spicy' },
+          { title: 'Premium', value: 'premium' },
+          { title: 'Featured', value: 'featured' },
         ],
-        layout: 'grid',
       },
-    }),
-
-    // ── Availability & Features ────────────────────
-    defineField({
-      name: 'isAvailable',
-      title: '✅ Наличен',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Изключи без изтриване — напр. временно изчерпан',
     }),
     defineField({
       name: 'isFeatured',
-      title: '⚡ Препоръчано от нас',
+      title: 'Featured',
       type: 'boolean',
       initialValue: false,
     }),
-
-    // ── Allergens ──────────────────────────────────
     defineField({
       name: 'allergens',
-      title: 'Алергени',
+      title: 'Allergens',
       type: 'array',
       of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
       options: {
-        list: [
-          { title: 'Глутен', value: 'gluten' },
-          { title: 'Яйца', value: 'eggs' },
-          { title: 'Мляко', value: 'milk' },
-          { title: 'Ядки', value: 'nuts' },
-          { title: 'Фъстъци', value: 'peanuts' },
-          { title: 'Соя', value: 'soy' },
-          { title: 'Серен диоксид', value: 'sulphites' },
-          { title: 'Риба', value: 'fish' },
-          { title: 'Морски дарове', value: 'shellfish' },
-          { title: 'Сусам', value: 'sesame' },
-          { title: 'Целина', value: 'celery' },
-          { title: 'Синап', value: 'mustard' },
-        ],
-        layout: 'grid',
+        hotspot: true,
       },
     }),
-
-    // ── Sub-category heading ───────────────────────
     defineField({
-      name: 'subCategory',
-      title: 'Подкатегория (подзаглавие)',
-      type: 'string',
-      description: 'напр. "Червени вина", "Шотландски малц", "Авторски коктейли"',
+      name: 'isAvailable',
+      title: 'Available',
+      type: 'boolean',
+      initialValue: true,
     }),
-
     defineField({
       name: 'order',
-      title: 'Наредба',
+      title: 'Order',
       type: 'number',
-      initialValue: 10,
+      initialValue: 0,
     }),
-  ],
-
-  preview: {
-    select: {
-      bg: 'name.bg',
-      price: 'price',
-      media: 'image',
-      available: 'isAvailable',
-      cat: 'category.name.bg',
-      featured: 'isFeatured',
-    },
-    prepare({ bg, price, media, available, cat, featured }) {
-      const flags = [
-        !available ? '🚫' : '',
-        featured ? '⚡' : '',
-      ].filter(Boolean).join(' ')
-      return {
-        title: `${flags} ${bg}`.trim(),
-        subtitle: `${cat ? cat + ' · ' : ''}${price ?? ''} €`,
-        media,
-      }
-    },
-  },
-
-  orderings: [
-    {
-      title: 'Категория → Наредба',
-      name: 'categoryOrder',
-      by: [{ field: 'category.order', direction: 'asc' }, { field: 'order', direction: 'asc' }],
-    },
   ],
 })
