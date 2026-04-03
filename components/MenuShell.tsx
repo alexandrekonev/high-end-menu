@@ -200,7 +200,13 @@ export default function MenuShell({
           <section className={styles.lunchSection}>
             <h2 className={styles.lunchSectionTitle}>{lunchTitle}</h2>
             <div className={styles.divider} />
-            <DailyMenuSection menu={dailyMenu as any} locale={locale} hideTitle />
+            <DailyMenuSection
+              menu={dailyMenu as any}
+              locale={locale}
+              hideTitle
+              showPriceEur={settings?.showPriceEur !== false}
+              showPriceBgn={settings?.showPriceBgn !== false}
+            />
           </section>
         )}
 

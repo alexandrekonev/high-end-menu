@@ -4,14 +4,10 @@ import styles from './DailyMenuSection.module.css'
 
 const EUR_TO_BGN = 1.95583
 
-function formatDishPrice(price: number | string | null | undefined, showBgn: boolean = true): string | null {
+function parseDishPrice(price: number | string | null | undefined): number | null {
   if (price == null || price === '') return null
   const num = typeof price === 'number' ? price : parseFloat(String(price).replace(',', '.'))
-  if (isNaN(num)) return null
-  const eur = `€ ${num.toFixed(2)}`
-  if (!showBgn) return eur
-  const bgn = `${(num * EUR_TO_BGN).toFixed(2)} лв.`
-  return `${eur} / ${bgn}`
+  return isNaN(num) ? null : num
 }
 
 // Portable Text components — each paragraph on its own line
@@ -37,9 +33,17 @@ interface DailyMenuSectionProps {
   menu: any
   locale: Locale
   hideTitle?: boolean
+  showPriceEur?: boolean
+  showPriceBgn?: boolean
 }
 
-export default function DailyMenuSection({ menu, locale, hideTitle = false }: DailyMenuSectionProps) {
+export default function DailyMenuSection({
+  menu,
+  locale,
+  hideTitle = false,
+  showPriceEur = true,
+  showPriceBgn = true,
+}: DailyMenuSectionProps) {
   if (!menu) {
     return null
   }
@@ -91,34 +95,58 @@ export default function DailyMenuSection({ menu, locale, hideTitle = false }: Da
                 {t(section.heading, locale)}
               </h3>
               <div className={styles.dishes}>
-                {section.dishes && section.dishes.map((dish: any, dishIdx: number) => (
-                  <div key={dishIdx} className={styles.dish}>
-                    <div className={styles.dishHeader}>
-                      <h4 className={styles.dishName}>
-                        {t(dish.name, locale)}
-                      </h4>
-                      {dish.price != null && dish.price !== '' && (
-                        <span className={styles.dishPrice}>
-                          {formatDishPrice(dish.price)}
-                        </span>
+                {section.dishes && section.dishes.map((dish: any, dishIdx: number) => {
+                  const priceNum = parseDishPrice(dish.price)
+                  return (
+                    <div key={dishIdx} className={styles.dish}>
+                      {/* Dish image */}
+                      {dish.image && (
+                        <div className={styles.dishImageWrapper}>
+                          <img
+                            src={dish.image}
+                            alt={t(dish.name, locale)}
+                            className={styles.dishImage}
+                          />
+                        </div>
                       )}
-                    </div>
-                    {dish.description && (
-                      <p className={styles.dishDescription}>
-                        {t(dish.description, locale)}
-                      </p>
-                    )}
-                    {dish.tags && dish.tags.length > 0 && (
-                      <div className={styles.tags}>
-                        {dish.tags.map((tag: string) => (
-                          <span key={tag} className={styles.tag}>
-                            {tag}
-                          </span>
-                        ))}
+                      <div className={styles.dishBody}>
+                        <div className={styles.dishHeader}>
+                          <h4 className={styles.dishName}>
+                            {t(dish.name, locale)}
+                          </h4>
+                          {priceNum != null && (showPriceEur || showPriceBgn) && (
+                            <div className={styles.dishPriceSection}>
+                              {showPriceEur && (
+                                <span className={styles.dishPriceEur}>
+                                  € {priceNum.toFixed(2)}
+                                </span>
+                              )}
+                              {showPriceBgn && (
+                                <span className={styles.dishPriceBgn}>
+                                  {(priceNum * EUR_TO_BGN).toFixed(2)} лв.
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                        {dish.description && (
+                          <p className={styles.dishDescription}>
+                            {t(dish.description, locale)}
+                          </p>
+                        )}
+                        {dish.tags && dish.tags.length > 0 && (
+                          <div className={styles.tags}>
+                            {dish.tags.map((tag: string) => (
+                              <span key={tag} className={styles.tag}>
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                ))}
+                    </div>
+                  )
+                })}
               </div>
             </div>
           ))}
