@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'The High-End Bar — Digital Menu',
   description: 'Discover our premium selection of cocktails and drinks',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
+  icons: {
+    icon: 'https://www.high-end.bg/images/static/logo-sign-light.svg',
+    shortcut: 'https://www.high-end.bg/images/static/logo-sign-light.svg',
+    apple: 'https://www.high-end.bg/images/static/logo-sign-light.svg',
+  },
 }
 
 export default function RootLayout({

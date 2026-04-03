@@ -143,27 +143,30 @@
   overflow: hidden;
 }
 
-/* Dish image — RIGHT */
+/* Dish image — RIGHT, 1/3 of dish width */
 .dishImageWrapper {
   order: 2;
-  width: 80px;
-  flex-shrink: 0;
+  flex: 0 0 33.33%;
   overflow: hidden;
   border-left: 1px solid var(--divider);
   border-radius: 0 4px 4px 0;
-  will-change: width;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dish:hover .dishImageWrapper {
-  width: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(14, 22, 27, 0.6);
 }
 
 .dishImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  transform: scale(0.82);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dish:hover .dishImage {
+  transform: scale(1);
 }
 
 .dishHeader {

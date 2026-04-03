@@ -15,7 +15,7 @@ export default function ItemRow({ item, locale, compact = false, showPriceBgn = 
     vegetarian: locale === 'bg' ? 'Вегетариански' : 'Vegetarian',
     vegan: locale === 'bg' ? 'Веган' : 'Vegan',
     'gluten-free': locale === 'bg' ? 'Без глутен' : 'Gluten-Free',
-    spicy: locale === 'bg' ? 'Остро' : 'Spicy',
+    spicy: locale === 'bg' ? 'Пикантно' : 'Spicy',
     premium: 'Premium',
     featured: locale === 'bg' ? 'Препоръчано' : 'Featured',
   }

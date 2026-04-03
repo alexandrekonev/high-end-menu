@@ -54,7 +54,7 @@ export const UI_STRINGS = {
     vegetarian: 'Вегетариански',
     vegan: 'Веган',
     glutenFree: 'Без глутен',
-    spicy: 'Острo',
+    spicy: 'Пикантно',
     premium: 'Premium',
     featured: 'Препоръчано',
     address: 'Адрес',
