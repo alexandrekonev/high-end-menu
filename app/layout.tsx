@@ -35,4 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body
+      <body>
+        {children}
+      </body>
+    </html>
+  )
+}

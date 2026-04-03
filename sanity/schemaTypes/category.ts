@@ -77,4 +77,5 @@ export const category = defineType({
       return { title: `${icon ?? '📂'} ${bg}`, subtitle: active ? 'активна' : '🚫 скрита' }
     },
   },
-  orderings: [{ title: 'Нар
+  orderings: [{ title: 'Наредба', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],
+})

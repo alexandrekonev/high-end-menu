@@ -107,4 +107,8 @@ export function isWithinTimeWindow(from: string, until: string): boolean {
   const now = new Date()
   const [fh, fm] = from.split(':').map(Number)
   const [uh, um] = until.split(':').map(Number)
-  const
+  const nowMins = now.getHours() * 60 + now.getMinutes()
+  const fromMins = fh * 60 + fm
+  const untilMins = uh * 60 + um
+  return nowMins >= fromMins && nowMins < untilMins
+}

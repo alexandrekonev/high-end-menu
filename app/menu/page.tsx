@@ -27,4 +27,7 @@ export default async function MenuBG() {
       categories={categories}
       items={items}
       settings={settings}
-      dailyM
+      dailyMenu={dailyMenu}
+    />
+  )
+}

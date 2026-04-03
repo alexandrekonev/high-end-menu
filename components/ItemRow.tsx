@@ -65,4 +65,8 @@ export default function ItemRow({ item, locale, compact = false }: Props) {
 
       <div className={s.right}>
         <span className={s.price}>{item.price} €</span>
-        {item.volume && <span cla
+        {item.volume && <span className={s.vol}>{item.volume}</span>}
+      </div>
+    </div>
+  )
+}

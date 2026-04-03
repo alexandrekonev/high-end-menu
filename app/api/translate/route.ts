@@ -48,4 +48,6 @@ export async function POST(req: NextRequest) {
 
   const data = await res.json() as DeepLResponse
   return NextResponse.json({
-    translati
+    translations: data.translations.map((t) => t.text),
+  })
+}

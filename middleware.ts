@@ -11,4 +11,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  mat
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|studio|api|menu|lunch).*)'],
+}

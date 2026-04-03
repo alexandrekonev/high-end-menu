@@ -136,4 +136,5 @@ export const lunchMenu = defineType({
       }
     },
   },
-  orderi
+  orderings: [{ title: 'Дата низходящо', name: 'dateDesc', by: [{ field: 'date', direction: 'desc' }] }],
+})
