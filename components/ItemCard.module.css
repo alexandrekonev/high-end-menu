@@ -111,7 +111,7 @@
 }
 
 .featuredBadge {
-  flex-shrink: 0;
+  align-self: flex-start;
   font-family: 'Open Sans', sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
@@ -123,6 +123,7 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
+  margin-bottom: 0.5rem;
 }
 
 .tags {
