@@ -11,77 +11,77 @@ interface ItemRowProps {
 }
 
 export default function ItemRow({ item, locale, compact = false, showPriceBgn = true, showPriceEur = true }: ItemRowProps) {
-  const tagLabels: { [key: string]: string } = {
-    vegetarian: locale === 'bg' ? 'Вегетариански' : 'Vegetarian',
-    vegan: locale === 'bg' ? 'Веган' : 'Vegan',
-    'gluten-free': locale === 'bg' ? 'Без глутен' : 'Gluten-Free',
-    spicy: locale === 'bg' ? 'Пикантно' : 'Spicy',
-    premium: 'Premium',
-    featured: locale === 'bg' ? 'Препоръчано' : 'Featured',
-  }
+  const allTags = [...(item.tags || []), ...(item.customTags || [])]
 
   return (
-    <div className={`${styles.row} ${compact ? styles.compact : ''}`}>
-      {/* Optional Image Thumbnail */}
-      {item.image && (
-        <div className={styles.thumbnail}>
-          <img
-            src={item.image}
-            alt={t(item.name, locale)}
-            className={styles.image}
-          />
-        </div>
-      )}
+    <div className={styles.rowOuter}>
+      <div className={`${styles.row} ${compact ? styles.compact : ''}`}>
+        {/* Optional Image Thumbnail */}
+        {item.image && (
+          <div className={styles.thumbnail}>
+            <img
+              src={item.image}
+              alt={t(item.name, locale)}
+              className={styles.image}
+            />
+          </div>
+        )}
 
-      {/* Main Content */}
-      <div className={styles.mainContent}>
-        <div className={styles.header}>
-          <div className={styles.nameCol}>
-            <h4 className={styles.name}>{t(item.name, locale)}</h4>
-            {item.isFeatured && (
-              <span className={styles.featuredBadge}>
-                ⭐ {locale === 'bg' ? 'Препоръчано' : 'Featured'}
-              </span>
+        {/* Main Content */}
+        <div className={styles.mainContent}>
+          <div className={styles.header}>
+            <div className={styles.nameCol}>
+              <h4 className={styles.name}>{t(item.name, locale)}</h4>
+              {item.isFeatured && (
+                <span className={styles.featuredBadge}>
+                  ⭐ {locale === 'bg' ? 'Препоръчано' : 'Featured'}
+                </span>
+              )}
+            </div>
+            {(showPriceBgn || showPriceEur) && (
+              <div className={styles.priceGroup}>
+                {showPriceEur && <span className={styles.priceEur}>€ {item.price}</span>}
+                {showPriceBgn && <span className={styles.price}>{toBgn(item.price)} лв.</span>}
+              </div>
             )}
           </div>
-          {(showPriceBgn || showPriceEur) && (
-            <div className={styles.priceGroup}>
-              {showPriceEur && <span className={styles.priceEur}>€ {item.price}</span>}
-              {showPriceBgn && <span className={styles.price}>{toBgn(item.price)} лв.</span>}
-            </div>
-          )}
-        </div>
 
-        {item.description && (
-          <p className={styles.description}>{t(item.description, locale)}</p>
-        )}
-
-        {/* Volume & Tags */}
-        <div className={styles.meta}>
-          {item.volume && (
-            <span className={styles.volume}>
-              <span className={styles.label}>Vol:</span> {item.volume}
-            </span>
+          {item.description && (
+            <p className={styles.description}>{t(item.description, locale)}</p>
           )}
 
-          {item.tags && item.tags.length > 0 && (
-            <div className={styles.tags}>
-              {item.tags.map((tag) => (
-                <span key={tag} className={styles.tag}>
-                  {tagLabels[tag] || tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
+          {/* Volume & Tags */}
+          <div className={styles.meta}>
+            {item.volume && (
+              <span className={styles.volume}>
+                <span className={styles.label}>Vol:</span> {item.volume}
+              </span>
+            )}
 
-        {/* Allergens */}
-        {item.allergens && item.allergens.length > 0 && (
-          <div className={styles.allergens}>
-            <strong>⚠️</strong> {item.allergens.join(', ')}
+            {allTags.length > 0 && (
+              <div className={styles.tags}>
+                {allTags.map((tag) => (
+                  <span key={tag} className={styles.tag}>{tag}</span>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+
+          {/* Allergens */}
+          {item.allergens && item.allergens.length > 0 && (
+            <div className={styles.allergens}>
+              <strong>⚠️</strong> {item.allergens.join(', ')}
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* NEW badge — half sticking out right */}
+      {item.isNew && (
+        <span className={styles.newBadge}>
+          {locale === 'bg' ? 'НОВО' : 'NEW'}
+        </span>
+      )}
     </div>
   )
 }

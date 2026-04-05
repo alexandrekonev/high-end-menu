@@ -14,7 +14,9 @@ export interface MenuItemData {
   price: string
   volume?: string | null
   tags?: string[] | null
+  customTags?: string[] | null
   isFeatured?: boolean | null
+  isNew?: boolean | null
   allergens?: string[] | null
   subCategory?: string | null
   _createdAt: string

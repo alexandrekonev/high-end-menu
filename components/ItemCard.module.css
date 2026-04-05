@@ -1,3 +1,8 @@
+/* ── Outer wrapper — allows badge to overflow card boundary ── */
+.cardOuter {
+  position: relative;
+}
+
 /* ── Card — horizontal layout, content left, image RIGHT ── */
 .card {
   background-color: var(--dark-card);
@@ -53,24 +58,23 @@
   transform: scale(1);
 }
 
-.badges {
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-  flex-shrink: 0;
-}
-
+/* NEW badge — absolute on .cardOuter, half sticking right of the image edge */
 .newBadge {
-  display: inline-block;
+  position: absolute;
+  top: 0.7rem;
+  right: 0;
+  transform: translateX(50%);
+  z-index: 20;
   background-color: var(--copper);
   color: var(--dark);
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 3px;
   font-family: 'Cormorant SC', serif;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 /* ── Content elements ── */
