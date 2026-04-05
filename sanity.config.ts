@@ -2,12 +2,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './sanity/schemaTypes'
-import {
-  orderableDocumentListDeskItem,
-  OrderableDocumentList,
-} from '@sanity/orderable-document-list'
-
-const API_VERSION = '2024-01-01'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 
 export default defineConfig({
   name: 'high-end-menu',
@@ -16,10 +11,8 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [
     structureTool({
-      structure: (S, context) => {
-        const client = context.getClient({ apiVersion: API_VERSION })
-
-        return S.list()
+      structure: (S, context) =>
+        S.list()
           .title('Content')
           .items([
             // ── Site Settings (singleton) ──
@@ -45,7 +38,8 @@ export default defineConfig({
 
             S.divider(),
 
-            // ── Menu Items by Category — drag to reorder within category ──
+            // ── Menu Items by Category — shown in orderRank order ──
+            // (drag to reorder via "All Menu Items" above)
             S.listItem()
               .title('Menu Items by Category')
               .id('menuItemsByCategory')
@@ -53,19 +47,12 @@ export default defineConfig({
                 S.documentTypeList('category')
                   .title('Select Category')
                   .child((categoryId: string) =>
-                    // Use OrderableDocumentList component directly with S.component()
-                    // so the filtered list gets drag handles
-                    (S.component()
-                      .id(`orderable-menuItem-${categoryId}`)
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      .component(OrderableDocumentList as any)
-                      .options({
-                        type: 'menuItem',
-                        filter: '_type == $type && category._ref == $categoryId',
-                        params: { type: 'menuItem', categoryId },
-                        client,
-                      })
-                      .title('Menu Items') as any)
+                    S.documentList()
+                      .title('Menu Items')
+                      .schemaType('menuItem')
+                      .filter('_type == "menuItem" && category._ref == $categoryId')
+                      .params({ categoryId })
+                      .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                   )
               ),
 
@@ -88,8 +75,7 @@ export default defineConfig({
                 S.documentTypeList('dailyMenu')
                   .title('Daily Menu')
               ),
-          ])
-      },
+          ]),
     }),
     visionTool(),
   ],
