@@ -45,17 +45,18 @@ export default function ItemRow({ item, locale, compact = false, showPriceBgn = 
             )}
           </div>
 
-          {/* Price — own row, below name, right-aligned */}
-          {(showPriceBgn || showPriceEur) && (
-            <div className={styles.priceGroup}>
-              {showPriceEur && <span className={styles.priceEur}>€ {item.price}</span>}
-              {showPriceBgn && <span className={styles.price}>{toBgn(item.price)} лв.</span>}
-            </div>
-          )}
-
-          {item.description && (
-            <p className={styles.description}>{t(item.description, locale)}</p>
-          )}
+          {/* Description + Price on the same row */}
+          <div className={styles.descPriceRow}>
+            {item.description && (
+              <p className={styles.description}>{t(item.description, locale)}</p>
+            )}
+            {(showPriceBgn || showPriceEur) && (
+              <div className={styles.priceGroup}>
+                {showPriceEur && <span className={styles.priceEur}>€ {item.price}</span>}
+                {showPriceBgn && <span className={styles.price}>{toBgn(item.price)} лв.</span>}
+              </div>
+            )}
+          </div>
 
           {/* Volume & Tags */}
           <div className={styles.meta}>
