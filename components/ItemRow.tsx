@@ -16,6 +16,12 @@ export default function ItemRow({ item, locale, compact = false, showPriceBgn = 
   return (
     <div className={styles.rowOuter}>
       <div className={`${styles.row} ${compact ? styles.compact : ''}`}>
+        {/* NEW badge — inside row, top-right corner */}
+        {item.isNew && (
+          <span className={styles.newBadge}>
+            {locale === 'bg' ? 'НОВО' : 'NEW'}
+          </span>
+        )}
         {/* Optional Image Thumbnail */}
         {item.image && (
           <div className={styles.thumbnail}>
@@ -75,13 +81,6 @@ export default function ItemRow({ item, locale, compact = false, showPriceBgn = 
           )}
         </div>
       </div>
-
-      {/* NEW badge — half sticking out right */}
-      {item.isNew && (
-        <span className={styles.newBadge}>
-          {locale === 'bg' ? 'НОВО' : 'NEW'}
-        </span>
-      )}
     </div>
   )
 }

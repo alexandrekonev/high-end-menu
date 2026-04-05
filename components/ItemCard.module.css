@@ -5,6 +5,7 @@
 
 /* ── Card — horizontal layout, content left, image RIGHT ── */
 .card {
+  position: relative;
   background-color: var(--dark-card);
   border: 1px solid var(--divider);
   border-radius: 8px;
@@ -58,13 +59,12 @@
   transform: scale(1);
 }
 
-/* NEW badge — absolute on .cardOuter, half sticking right of the image edge */
+/* NEW badge — inside .card, top-right corner (over the image area) */
 .newBadge {
   position: absolute;
-  top: 0.7rem;
-  right: 0;
-  transform: translateX(50%);
-  z-index: 20;
+  top: 0.65rem;
+  right: 0.75rem;
+  z-index: 10;
   background-color: var(--copper);
   color: var(--dark);
   padding: 0.25rem 0.65rem;
@@ -103,14 +103,6 @@
 
 .volumeLabel {
   font-weight: 600;
-}
-
-.nameRow {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .featured {
