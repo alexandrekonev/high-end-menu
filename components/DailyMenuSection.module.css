@@ -124,6 +124,7 @@
   border: 1px solid var(--divider);
   border-radius: 4px;
   overflow: hidden;
+  max-height: 140px;
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
@@ -179,7 +180,7 @@
 
 .dishName {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--silver);
   margin: 0;
   font-weight: 600;
@@ -197,7 +198,7 @@
 
 .dishPriceEur {
   font-family: 'Cormorant SC', serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--copper);
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -206,7 +207,7 @@
 
 .dishPriceBgn {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   color: var(--silver);
   font-weight: 400;
   opacity: 0.7;
@@ -214,7 +215,7 @@
 }
 
 .dishDescription {
-  font-size: 0.85rem;
+  font-size: 1.02rem;
   color: var(--warm-gray);
   margin: 0.5rem 0;
   line-height: 1.4;

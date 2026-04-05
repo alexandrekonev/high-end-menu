@@ -82,7 +82,7 @@
 
 .name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--silver);
   margin: 0;
   font-weight: 600;
@@ -113,7 +113,7 @@
 
 .priceEur {
   font-family: 'Cormorant SC', serif;
-  font-size: 1.2rem;
+  font-size: 1.32rem;
   color: var(--copper);
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -122,7 +122,7 @@
 
 .price {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--silver);
   font-weight: 400;
   white-space: nowrap;
@@ -130,7 +130,7 @@
 }
 
 .description {
-  font-size: 0.9rem;
+  font-size: 1.08rem;
   color: var(--warm-gray);
   margin: 0;
   line-height: 1.4;
@@ -188,11 +188,11 @@
   }
 
   .name {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .description {
-    font-size: 0.85rem;
+    font-size: 1.02rem;
   }
 
   .header {

@@ -75,11 +75,24 @@ export default defineType({
     defineField({
       name: 'tags',
       title: 'Tags',
-      description: 'Добавете собствени тагове — напр. "Пикантно", "Веган", "Сезонно", "Препоръчано". Въведете текст и натиснете Enter.',
+      description: 'Изберете от предложените тагове. За нов таг — напишете го и натиснете Enter.',
       type: 'array',
       of: [{ type: 'string' }],
       options: {
         layout: 'tags',
+        list: [
+          { title: 'Пикантно', value: 'Пикантно' },
+          { title: 'Веган', value: 'Веган' },
+          { title: 'Вегетарианско', value: 'Вегетарианско' },
+          { title: 'Без глутен', value: 'Без глутен' },
+          { title: 'Без лактоза', value: 'Без лактоза' },
+          { title: 'Препоръчано', value: 'Препоръчано' },
+          { title: 'Сезонно', value: 'Сезонно' },
+          { title: 'Ново', value: 'Ново' },
+          { title: 'Домашно', value: 'Домашно' },
+          { title: 'Алкохолно', value: 'Алкохолно' },
+          { title: 'Безалкохолно', value: 'Безалкохолно' },
+        ],
       },
     }),
     defineField({

@@ -31,7 +31,6 @@ export default function ItemCard({ item, locale, showPriceBgn = true, showPriceE
             alt={t(item.name, locale)}
             className={styles.image}
           />
-          {isNewItem && <div className={styles.newBadge}>NEW</div>}
         </div>
       )}
 
@@ -39,11 +38,14 @@ export default function ItemCard({ item, locale, showPriceBgn = true, showPriceE
       <div className={styles.content}>
         <div className={styles.nameRow}>
           <h3 className={styles.name}>{t(item.name, locale)}</h3>
-          {item.isFeatured && (
-            <span className={styles.featuredBadge}>
-              ⭐ {locale === 'bg' ? 'Препоръчано' : 'Featured'}
-            </span>
-          )}
+          <div className={styles.badges}>
+            {isNewItem && <span className={styles.newBadge}>{locale === 'bg' ? 'НОВО' : 'NEW'}</span>}
+            {item.isFeatured && (
+              <span className={styles.featuredBadge}>
+                ⭐ {locale === 'bg' ? 'Препоръчано' : 'Featured'}
+              </span>
+            )}
+          </div>
         </div>
 
         {item.description && (
