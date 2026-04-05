@@ -3,6 +3,7 @@ import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './sanity/schemaTypes'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
+import { ReorderPublishAction } from './sanity/actions/reorderPublishAction'
 
 export default defineConfig({
   name: 'high-end-menu',
@@ -38,8 +39,8 @@ export default defineConfig({
 
             S.divider(),
 
-            // ── Menu Items by Category — shown in orderRank order ──
-            // (drag to reorder via "All Menu Items" above)
+            // ── Menu Items by Category — shown in numeric `order` field order ──
+            // (set position number in each item; auto-shifts siblings on publish)
             S.listItem()
               .title('Menu Items by Category')
               .id('menuItemsByCategory')
@@ -52,7 +53,7 @@ export default defineConfig({
                       .schemaType('menuItem')
                       .filter('_type == "menuItem" && category._ref == $categoryId')
                       .params({ categoryId })
-                      .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
+                      .defaultOrdering([{ field: 'order', direction: 'asc' }])
                   )
               ),
 
@@ -80,4 +81,19 @@ export default defineConfig({
     visionTool(),
   ],
   schema: { types: schemaTypes },
+
+  document: {
+    // For menuItem documents, replace the default Publish action with one that
+    // auto-shifts sibling items when the `order` (position) field changes.
+    actions: (prev, ctx) => {
+      if (ctx.schemaType === 'menuItem') {
+        return prev.map((Action) =>
+          (Action as unknown as { action?: string }).action === 'publish'
+            ? ReorderPublishAction
+            : Action
+        )
+      }
+      return prev
+    },
+  },
 })

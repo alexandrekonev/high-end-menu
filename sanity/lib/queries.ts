@@ -24,7 +24,7 @@ export const categoriesQuery = `
 `
 
 export const menuItemsQuery = `
-  *[_type == "menuItem" && isAvailable == true] | order(orderRank asc) {
+  *[_type == "menuItem" && isAvailable == true] | order(order asc, _createdAt asc) {
     _id,
     name,
     description,
