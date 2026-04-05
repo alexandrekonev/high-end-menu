@@ -51,6 +51,11 @@
   min-width: 0;
 }
 
+/* Extra right padding so NEW badge doesn't cover the price */
+.hasNewBadge {
+  padding-right: 4rem;
+}
+
 .row.compact .mainContent {
   padding: 1rem;
 }

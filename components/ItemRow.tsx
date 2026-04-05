@@ -34,7 +34,7 @@ export default function ItemRow({ item, locale, compact = false, showPriceBgn = 
         )}
 
         {/* Main Content */}
-        <div className={styles.mainContent}>
+        <div className={`${styles.mainContent} ${item.isNew ? styles.hasNewBadge : ''}`}>
           <div className={styles.header}>
             <div className={styles.nameCol}>
               <h4 className={styles.name}>{t(item.name, locale)}</h4>
