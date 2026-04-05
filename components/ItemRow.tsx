@@ -34,23 +34,24 @@ export default function ItemRow({ item, locale, compact = false, showPriceBgn = 
         )}
 
         {/* Main Content */}
-        <div className={`${styles.mainContent} ${item.isNew ? styles.hasNewBadge : ''}`}>
-          <div className={styles.header}>
-            <div className={styles.nameCol}>
-              <h4 className={styles.name}>{t(item.name, locale)}</h4>
-              {item.isFeatured && (
-                <span className={styles.featuredBadge}>
-                  ⭐ {locale === 'bg' ? 'Препоръчано' : 'Featured'}
-                </span>
-              )}
-            </div>
-            {(showPriceBgn || showPriceEur) && (
-              <div className={styles.priceGroup}>
-                {showPriceEur && <span className={styles.priceEur}>€ {item.price}</span>}
-                {showPriceBgn && <span className={styles.price}>{toBgn(item.price)} лв.</span>}
-              </div>
+        <div className={styles.mainContent}>
+          {/* Name block — top, leaves room for NEW badge on the right */}
+          <div className={styles.nameBlock}>
+            <h4 className={styles.name}>{t(item.name, locale)}</h4>
+            {item.isFeatured && (
+              <span className={styles.featuredBadge}>
+                ⭐ {locale === 'bg' ? 'Препоръчано' : 'Featured'}
+              </span>
             )}
           </div>
+
+          {/* Price — own row, below name, right-aligned */}
+          {(showPriceBgn || showPriceEur) && (
+            <div className={styles.priceGroup}>
+              {showPriceEur && <span className={styles.priceEur}>€ {item.price}</span>}
+              {showPriceBgn && <span className={styles.price}>{toBgn(item.price)} лв.</span>}
+            </div>
+          )}
 
           {item.description && (
             <p className={styles.description}>{t(item.description, locale)}</p>
