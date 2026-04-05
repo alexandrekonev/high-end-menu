@@ -2,8 +2,12 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './sanity/schemaTypes'
-import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
-import { groq } from 'next-sanity'
+import {
+  orderableDocumentListDeskItem,
+  OrderableDocumentList,
+} from '@sanity/orderable-document-list'
+
+const API_VERSION = '2024-01-01'
 
 export default defineConfig({
   name: 'high-end-menu',
@@ -12,8 +16,10 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [
     structureTool({
-      structure: (S, context) =>
-        S.list()
+      structure: (S, context) => {
+        const client = context.getClient({ apiVersion: API_VERSION })
+
+        return S.list()
           .title('Content')
           .items([
             // ── Site Settings (singleton) ──
@@ -46,20 +52,24 @@ export default defineConfig({
               .child(
                 S.documentTypeList('category')
                   .title('Select Category')
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   .child((categoryId: string) =>
-                    (orderableDocumentListDeskItem({
-                      type: 'menuItem',
-                      title: 'Menu Items',
-                      filter: '_type == $type && category._ref == $categoryId',
-                      params: { type: 'menuItem', categoryId },
-                      S,
-                      context,
-                    }) as any).getChild()
+                    // Use OrderableDocumentList component directly with S.component()
+                    // so the filtered list gets drag handles
+                    (S.component()
+                      .id(`orderable-menuItem-${categoryId}`)
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      .component(OrderableDocumentList as any)
+                      .options({
+                        type: 'menuItem',
+                        filter: '_type == $type && category._ref == $categoryId',
+                        params: { type: 'menuItem', categoryId },
+                        client,
+                      })
+                      .title('Menu Items') as any)
                   )
               ),
 
-            // ── All Menu Items (flat, also orderable) ──
+            // ── All Menu Items (flat, orderable) ──
             orderableDocumentListDeskItem({
               type: 'menuItem',
               title: 'All Menu Items',
@@ -78,7 +88,8 @@ export default defineConfig({
                 S.documentTypeList('dailyMenu')
                   .title('Daily Menu')
               ),
-          ]),
+          ])
+      },
     }),
     visionTool(),
   ],
