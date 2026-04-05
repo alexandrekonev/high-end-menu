@@ -3,7 +3,7 @@ import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './sanity/schemaTypes'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
-import { ReorderPublishAction } from './sanity/actions/reorderPublishAction'
+import { CategoryOrderableList } from './sanity/components/CategoryOrderableList'
 
 export default defineConfig({
   name: 'high-end-menu',
@@ -39,21 +39,19 @@ export default defineConfig({
 
             S.divider(),
 
-            // ── Menu Items by Category — shown in numeric `order` field order ──
-            // (set position number in each item; auto-shifts siblings on publish)
+            // ── Menu Items by Category — custom drag-and-drop per category ──
+            // Drag rows to reorder. Click the edit icon to open an item.
             S.listItem()
               .title('Menu Items by Category')
               .id('menuItemsByCategory')
               .child(
                 S.documentTypeList('category')
-                  .title('Select Category')
+                  .title('Избери категория')
                   .child((categoryId: string) =>
-                    S.documentList()
-                      .title('Menu Items')
-                      .schemaType('menuItem')
-                      .filter('_type == "menuItem" && category._ref == $categoryId')
-                      .params({ categoryId })
-                      .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                    S.component(CategoryOrderableList)
+                      .id(`cat-orderable-${categoryId}`)
+                      .title('Артикули')
+                      .options({ categoryId })
                   )
               ),
 
@@ -81,19 +79,4 @@ export default defineConfig({
     visionTool(),
   ],
   schema: { types: schemaTypes },
-
-  document: {
-    // For menuItem documents, replace the default Publish action with one that
-    // auto-shifts sibling items when the `order` (position) field changes.
-    actions: (prev, ctx) => {
-      if (ctx.schemaType === 'menuItem') {
-        return prev.map((Action) =>
-          (Action as unknown as { action?: string }).action === 'publish'
-            ? ReorderPublishAction
-            : Action
-        )
-      }
-      return prev
-    },
-  },
 })
