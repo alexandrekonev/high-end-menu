@@ -14,7 +14,7 @@ export const settingsQuery = `
 `
 
 export const categoriesQuery = `
-  *[_type == "category" && isActive == true] | order(order asc) {
+  *[_type == "category" && isActive == true] | order(orderRank asc) {
     _id,
     name,
     "slug": slug.current,
@@ -24,7 +24,7 @@ export const categoriesQuery = `
 `
 
 export const menuItemsQuery = `
-  *[_type == "menuItem" && isAvailable == true] | order(order asc) {
+  *[_type == "menuItem" && isAvailable == true] | order(orderRank asc) {
     _id,
     name,
     description,

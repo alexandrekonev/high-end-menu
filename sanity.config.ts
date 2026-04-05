@@ -2,7 +2,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './sanity/schemaTypes'
-import type { StructureBuilder } from 'sanity/structure'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import { groq } from 'next-sanity'
 
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [
     structureTool({
-      structure: (S: StructureBuilder) =>
+      structure: (S, context) =>
         S.list()
           .title('Content')
           .items([
@@ -29,29 +29,44 @@ export default defineConfig({
 
             S.divider(),
 
-            // ── Categories ──
-            S.documentTypeListItem('category').title('Categories'),
+            // ── Categories — drag to reorder ──
+            orderableDocumentListDeskItem({
+              type: 'category',
+              title: 'Categories',
+              S,
+              context,
+            }),
 
             S.divider(),
 
-            // ── Menu Items grouped by Category ──
+            // ── Menu Items by Category — drag to reorder within category ──
             S.listItem()
               .title('Menu Items by Category')
               .id('menuItemsByCategory')
               .child(
                 S.documentTypeList('category')
                   .title('Select Category')
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   .child((categoryId: string) =>
-                    S.documentList()
-                      .title('Items')
-                      .schemaType('menuItem')
-                      .filter('_type == "menuItem" && category._ref == $categoryId')
-                      .params({ categoryId })
+                    (orderableDocumentListDeskItem({
+                      type: 'menuItem',
+                      title: 'Menu Items',
+                      filter: '_type == $type && category._ref == $categoryId',
+                      params: { type: 'menuItem', categoryId },
+                      S,
+                      context,
+                    }) as any).getChild()
                   )
               ),
 
-            // ── All Menu Items flat list ──
-            S.documentTypeListItem('menuItem').title('All Menu Items'),
+            // ── All Menu Items (flat, also orderable) ──
+            orderableDocumentListDeskItem({
+              type: 'menuItem',
+              title: 'All Menu Items',
+              id: 'allMenuItems',
+              S,
+              context,
+            }),
 
             S.divider(),
 

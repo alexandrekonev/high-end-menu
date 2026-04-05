@@ -1,9 +1,11 @@
 import { defineField, defineType } from 'sanity'
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 
 export default defineType({
   name: 'menuItem',
   title: 'Menu Item',
   type: 'document',
+  orderings: [orderRankOrdering],
   preview: {
     select: {
       title: 'name.bg',
@@ -11,6 +13,7 @@ export default defineType({
     },
   },
   fields: [
+    orderRankField({ type: 'menuItem' }),
     defineField({
       name: 'name',
       title: 'Name',
