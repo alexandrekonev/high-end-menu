@@ -1,12 +1,15 @@
 :root {
+  /* --copper is overridden per-page via an inline style on the root container.
+     The derived variants are computed automatically using color-mix().         */
   --copper: #845D41;
-  --copper-lt: #A0775A;
-  --copper-dk: #5E3F28;
+  --copper-lt: color-mix(in srgb, var(--copper) 72%, white);
+  --copper-dk: color-mix(in srgb, var(--copper) 72%, black);
+  --divider: color-mix(in srgb, var(--copper) 40%, transparent);
+
   --dark: #132028;
   --dark-card: #1C2D36;
   --silver: #D8DEDE;
   --warm-gray: #99A7A7;
-  --divider: rgba(132, 93, 65, 0.30);
 }
 
 * {

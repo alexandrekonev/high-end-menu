@@ -1,15 +1,28 @@
 import type { Metadata } from 'next'
+import { client } from '@/sanity/lib/client'
+import { settingsQuery } from '@/sanity/lib/queries'
 import './globals.css'
 
-export const metadata: Metadata = {
-  title: 'The High-End Bar — Digital Menu',
-  description: 'Discover our premium selection of cocktails and drinks',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
-  icons: {
-    icon: 'https://www.high-end.bg/images/static/logo-sign-light.svg',
-    shortcut: 'https://www.high-end.bg/images/static/logo-sign-light.svg',
-    apple: 'https://www.high-end.bg/images/static/logo-sign-light.svg',
-  },
+// Revalidate layout metadata every 60 s (ISR)
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await client.fetch<any>(settingsQuery)
+  const venueName = settings?.venueName || 'Restaurant'
+  const logoUrl   = settings?.logoEmblemUrl as string | undefined
+
+  return {
+    title: `${venueName} — Digital Menu`,
+    description: `Discover the menu of ${venueName}`,
+    viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
+    ...(logoUrl && {
+      icons: {
+        icon: logoUrl,
+        shortcut: logoUrl,
+        apple: logoUrl,
+      },
+    }),
+  }
 }
 
 export default function RootLayout({

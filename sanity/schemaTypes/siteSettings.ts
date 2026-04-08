@@ -15,7 +15,43 @@ export default defineType({
   title: 'Site Settings',
   type: 'document',
   fields: [
-    // ── Happy Hour ──
+
+    // ── Identity ──────────────────────────────────────────────────────────────
+    defineField({
+      name: 'venueName',
+      title: 'Venue Name',
+      type: 'string',
+      description: 'Used in browser tab title, footer copyright and image alt text',
+      initialValue: 'My Restaurant',
+    }),
+    defineField({
+      name: 'logoEmblem',
+      title: 'Logo — Emblem / Sign',
+      type: 'image',
+      description: 'Small emblem displayed in the hero area and the footer',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'logoFull',
+      title: 'Logo — Full (text version)',
+      type: 'image',
+      description: 'Full logotype with text, shown below the emblem in the hero',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'accentColor',
+      title: 'Accent Color (hex)',
+      type: 'string',
+      description: 'Primary accent colour used throughout the menu. Example: #845D41',
+      initialValue: '#845D41',
+      validation: (Rule) =>
+        Rule.regex(/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/, {
+          name: 'hex colour',
+          invert: false,
+        }).warning('Should be a valid hex color, e.g. #845D41'),
+    }),
+
+    // ── Happy Hour ────────────────────────────────────────────────────────────
     defineField({
       name: 'happyHourActive',
       title: 'Happy Hour Active',
@@ -46,7 +82,7 @@ export default defineType({
       ],
     }),
 
-    // ── Lunch / Daily Menu ──
+    // ── Lunch / Daily Menu ────────────────────────────────────────────────────
     defineField({
       name: 'lunchMenuActive',
       title: 'Lunch Menu Active',
@@ -65,7 +101,7 @@ export default defineType({
       ],
     }),
 
-    // ── Price display ──
+    // ── Price display ─────────────────────────────────────────────────────────
     defineField({
       name: 'showPriceEur',
       title: 'Show prices in EUR (€)',
@@ -80,7 +116,7 @@ export default defineType({
       description: 'BGN is calculated automatically: 1 EUR = 1.95583 лв.',
     }),
 
-    // ── Footer ──
+    // ── Footer ────────────────────────────────────────────────────────────────
     defineField({
       name: 'address',
       title: 'Address',

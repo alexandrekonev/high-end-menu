@@ -7,6 +7,12 @@ import ItemRow from './ItemRow'
 import DailyMenuSection from './DailyMenuSection'
 import styles from './MenuShell.module.css'
 
+// Fallback logo URLs (used when no logo is uploaded in Sanity)
+const FALLBACK_EMBLEM = 'https://www.high-end.bg/images/static/logo-sign-light.svg'
+const FALLBACK_LOGO   = 'https://www.high-end.bg/images/static/logo-vertical-text.svg'
+const FALLBACK_COLOR  = '#845D41'
+const FALLBACK_NAME   = 'Restaurant'
+
 export interface MenuItemData {
   _id: string
   name: { bg?: string | null; en?: string | null }
@@ -54,14 +60,20 @@ export default function MenuShell({
   const observerRef = useRef<IntersectionObserver | null>(null)
   const isScrollingRef = useRef(false)
 
-  // Happy Hour: show if active + within time window (if times set)
+  // ── Derived settings with fallbacks ─────────────────────────────────────
+  const venueName    = settings?.venueName     || FALLBACK_NAME
+  const emblemUrl    = settings?.logoEmblemUrl || FALLBACK_EMBLEM
+  const logoFullUrl  = settings?.logoFullUrl   || FALLBACK_LOGO
+  const accentColor  = settings?.accentColor   || FALLBACK_COLOR
+
+  // ── Happy Hour ───────────────────────────────────────────────────────────
   const happyHourActive =
     settings?.happyHourActive && (
       !settings?.happyHourFrom || !settings?.happyHourUntil ||
       isWithinTimeWindow(settings.happyHourFrom, settings.happyHourUntil)
     )
 
-  // Lunch: show if active + daily menu exists + within time window (if times set)
+  // ── Lunch Menu ───────────────────────────────────────────────────────────
   const lunchMenuActive =
     settings?.lunchMenuActive &&
     dailyMenu && (
@@ -72,7 +84,7 @@ export default function MenuShell({
   const lunchTitle = t(settings?.lunchMenuTitle, locale) ||
     (locale === 'bg' ? 'Обедно меню' : 'Lunch Menu')
 
-  // Group items by category slug
+  // ── Group items by category slug ─────────────────────────────────────────
   const itemsByCategory: { [key: string]: MenuItemData[] } = {}
   items.forEach((item) => {
     if (!itemsByCategory[item.categorySlug]) {
@@ -81,7 +93,6 @@ export default function MenuShell({
     itemsByCategory[item.categorySlug].push(item)
   })
 
-  // Group items by subcategory within a category
   const itemsBySubCategory = (categorySlug: string) => {
     const categoryItems = itemsByCategory[categorySlug] || []
     const grouped: { [key: string]: MenuItemData[] } = {}
@@ -93,13 +104,11 @@ export default function MenuShell({
     return grouped
   }
 
-  // Scroll to section when nav button clicked
+  // ── Scroll helpers ───────────────────────────────────────────────────────
   const scrollToSection = (slug: string) => {
     setActiveSlug(slug)
-    // Scroll active nav button into view horizontally
     const btn = document.getElementById(`nav-${slug}`)
     if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-    // Block observer updates while scrolling
     isScrollingRef.current = true
     setTimeout(() => { isScrollingRef.current = false }, 1000)
     setTimeout(() => {
@@ -111,7 +120,7 @@ export default function MenuShell({
     }, 10)
   }
 
-  // Highlight active nav button on scroll (IntersectionObserver)
+  // ── Active nav highlight on scroll ──────────────────────────────────────
   useEffect(() => {
     if (categories.length === 0) return
     observerRef.current = new IntersectionObserver(
@@ -133,22 +142,26 @@ export default function MenuShell({
   }, [categories])
 
   return (
-    <div className={styles.container}>
+    /* Inject dynamic accent colour as a CSS custom property on the root element.
+       All child styles that use var(--copper) will pick it up automatically.   */
+    <div
+      className={styles.container}
+      style={{ '--copper': accentColor } as React.CSSProperties}
+    >
       {/* Header */}
       <header className={styles.header}>
-        {/* Hero section: emblem on top, text logo below */}
         <div className={styles.hero}>
           <img
-            src="https://www.high-end.bg/images/static/logo-sign-light.svg"
+            src={emblemUrl}
             alt=""
             className={styles.heroEmblem}
           />
           <img
-            src="https://www.high-end.bg/images/static/logo-vertical-text.svg"
-            alt="The High-End Bar"
+            src={logoFullUrl}
+            alt={venueName}
             className={styles.heroLogo}
           />
-          {/* Language toggle — centred below the logo */}
+          {/* Language toggle */}
           <div className={styles.langToggle}>
             <a
               href="/menu"
@@ -212,7 +225,7 @@ export default function MenuShell({
           </section>
         )}
 
-        {/* All Category Sections */}
+        {/* Category Sections */}
         {categories.map((cat) => {
           const catItems = itemsByCategory[cat.slug] || []
           const subGroups = itemsBySubCategory(cat.slug)
@@ -276,8 +289,8 @@ export default function MenuShell({
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <img
-            src="https://www.high-end.bg/images/static/logo-sign-light.svg"
-            alt="The High-End Bar"
+            src={emblemUrl}
+            alt={venueName}
             className={styles.footerLogo}
           />
           <div className={styles.footerInfo}>
@@ -286,7 +299,7 @@ export default function MenuShell({
               <p className={styles.note}>{t(settings.footerNote, locale)}</p>
             )}
             <p className={styles.copyright}>
-              © 2024 The High-End Bar. {ui_t('copyright', locale)}.
+              © {new Date().getFullYear()} {venueName}. {ui_t('copyright', locale)}.
             </p>
           </div>
         </div>

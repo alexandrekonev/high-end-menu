@@ -1,5 +1,9 @@
 export const settingsQuery = `
   *[_type == "siteSettings"][0] {
+    venueName,
+    accentColor,
+    "logoEmblemUrl": logoEmblem.asset->url,
+    "logoFullUrl": logoFull.asset->url,
     happyHourActive,
     happyHourFrom,
     happyHourUntil,
