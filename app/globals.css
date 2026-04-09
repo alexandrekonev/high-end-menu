@@ -19,7 +19,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior handled via JS window.scrollTo({ behavior:'smooth' })
+     so that Firefox doesn't double-animate and break IntersectionObserver */
 }
 
 body {
