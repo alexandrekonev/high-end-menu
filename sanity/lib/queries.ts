@@ -67,3 +67,9 @@ export const todayMenuQuery = `
         name,
         description,
         price,
+        tags,
+        "image": image.asset->url
+      }
+    }
+  }
+`

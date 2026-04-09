@@ -200,4 +200,12 @@ export default defineType({
     }),
     defineField({
       name: 'footerNote',
-      title: '
+      title: 'Footer Note',
+      type: 'object',
+      fields: [
+        { name: 'bg', title: 'Bulgarian', type: 'string' },
+        { name: 'en', title: 'English', type: 'string' },
+      ],
+    }),
+  ],
+})
