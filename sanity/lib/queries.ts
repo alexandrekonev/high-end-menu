@@ -31,7 +31,8 @@ export const categoriesQuery = `
     name,
     "slug": slug.current,
     icon,
-    displayStyle
+    displayStyle,
+    isFeatured
   }
 `
 
