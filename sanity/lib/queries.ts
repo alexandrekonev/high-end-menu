@@ -19,13 +19,14 @@ export const settingsQuery = `
     facebookUrl,
     tiktokUrl,
     googleReviewUrl,
+    googleWriteReviewUrl,
     workingHours,
     footerNote
   }
 `
 
 export const categoriesQuery = `
-  *[_type == "category" && isActive == true] | order(orderRank asc) {
+  *[_type == "category" && isActive == true && count(*[_type == "menuItem" && references(^._id) && isAvailable == true]) > 0] | order(orderRank asc) {
     _id,
     name,
     "slug": slug.current,
@@ -66,9 +67,3 @@ export const todayMenuQuery = `
         name,
         description,
         price,
-        tags,
-        "image": image.asset->url
-      }
-    }
-  }
-`

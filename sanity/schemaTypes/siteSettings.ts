@@ -146,8 +146,15 @@ export default defineType({
     }),
     defineField({
       name: 'googleReviewUrl',
-      title: 'Google Maps / Review URL',
+      title: 'Google Maps / Business Page URL',
       type: 'url',
+      description: 'Link to your Google Maps business listing',
+    }),
+    defineField({
+      name: 'googleWriteReviewUrl',
+      title: 'Google — Write a Review URL',
+      type: 'url',
+      description: 'Direct link to the Google review form. Get it from Google My Business → "Ask for reviews"',
     }),
 
     // ── Working Hours ─────────────────────────────────────────────────────────
@@ -193,12 +200,4 @@ export default defineType({
     }),
     defineField({
       name: 'footerNote',
-      title: 'Footer Note',
-      type: 'object',
-      fields: [
-        { name: 'bg', title: 'Bulgarian', type: 'string' },
-        { name: 'en', title: 'English', type: 'string' },
-      ],
-    }),
-  ],
-})
+      title: '

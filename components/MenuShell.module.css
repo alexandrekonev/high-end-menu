@@ -65,6 +65,28 @@
   transform: scale(1.15);
 }
 
+.googleReviewBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 2rem;
+  padding: 0.25rem 0.6rem 0.25rem 0.45rem;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.googleReviewBtn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+}
+
 /* Hero */
 .hero {
   padding: 1rem 2rem 1.2rem;
@@ -532,31 +554,4 @@
   justify-content: center;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
-  backdrop-filter: blur(6px);
-}
-
-.fabCall:hover {
-  background: var(--copper);
-  color: #fff;
-}
-
-.fabReservation {
-  padding: 0.65rem 1.1rem;
-  border-radius: 2rem;
-  background: var(--copper);
-  border: none;
-  color: #fff;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.2s ease, transform 0.15s ease;
-  backdrop-filter: blur(6px);
-}
-
-.fabReservation:hover {
-  background: var(--copper-lt);
-  transform: scale(1.03);
-}
+  backdrop-filte
