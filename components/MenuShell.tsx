@@ -458,4 +458,19 @@ export default function MenuShell({
             onClick={() => setReservationOpen(true)}
             aria-label={locale === 'bg' ? 'Резервация' : 'Reservation'}
           >
-            {locale === 'bg' ? 'Резервация' : 'R
+            {locale === 'bg' ? 'Резервация' : 'Reservation'}
+          </button>
+        )}
+      </div>
+
+      {/* ── Reservation Modal ─────────────────────────────────────────────── */}
+      {reservationOpen && (
+        <ReservationModal
+          locale={locale}
+          venueName={venueName}
+          onClose={() => setReservationOpen(false)}
+        />
+      )}
+    </div>
+  )
+}
