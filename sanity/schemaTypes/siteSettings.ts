@@ -116,6 +116,75 @@ export default defineType({
       description: 'BGN is calculated automatically: 1 EUR = 1.95583 лв.',
     }),
 
+    // ── Contact & Social ──────────────────────────────────────────────────────
+    defineField({
+      name: 'phone',
+      title: 'Phone Number',
+      type: 'string',
+      description: 'Shown as a floating call button. Example: 0886678787',
+    }),
+    defineField({
+      name: 'reservationEmail',
+      title: 'Reservation Email',
+      type: 'string',
+      description: 'Email address where reservation requests are sent',
+    }),
+    defineField({
+      name: 'instagramUrl',
+      title: 'Instagram URL',
+      type: 'url',
+    }),
+    defineField({
+      name: 'facebookUrl',
+      title: 'Facebook URL',
+      type: 'url',
+    }),
+    defineField({
+      name: 'tiktokUrl',
+      title: 'TikTok URL',
+      type: 'url',
+    }),
+    defineField({
+      name: 'googleReviewUrl',
+      title: 'Google Maps / Review URL',
+      type: 'url',
+    }),
+
+    // ── Working Hours ─────────────────────────────────────────────────────────
+    defineField({
+      name: 'workingHours',
+      title: 'Working Hours',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'day',
+              title: 'Day',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Monday / Понеделник',    value: 'monday' },
+                  { title: 'Tuesday / Вторник',      value: 'tuesday' },
+                  { title: 'Wednesday / Сряда',      value: 'wednesday' },
+                  { title: 'Thursday / Четвъртък',   value: 'thursday' },
+                  { title: 'Friday / Петък',         value: 'friday' },
+                  { title: 'Saturday / Събота',      value: 'saturday' },
+                  { title: 'Sunday / Неделя',        value: 'sunday' },
+                ],
+              },
+            },
+            { name: 'hours',   title: 'Hours',           type: 'string', description: 'e.g. 08:00 — 20:00' },
+            { name: 'concept', title: 'Concept (opt.)',   type: 'string', description: 'e.g. Breakfast, Cocktail Hour' },
+          ],
+          preview: {
+            select: { title: 'day', subtitle: 'hours' },
+          },
+        },
+      ],
+    }),
+
     // ── Footer ────────────────────────────────────────────────────────────────
     defineField({
       name: 'address',

@@ -44,6 +44,27 @@
   font-size: 0.72rem;
 }
 
+/* Social icons in header */
+.headerSocial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  margin-top: 0.6rem;
+}
+
+.headerSocialLink {
+  color: rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.headerSocialLink:hover {
+  color: rgba(255, 255, 255, 0.95);
+  transform: scale(1.15);
+}
+
 /* Hero */
 .hero {
   padding: 1rem 2rem 1.2rem;
@@ -403,4 +424,139 @@
   .section {
     margin-bottom: 2.5rem;
   }
+}
+
+/* ── Working Hours ───────────────────────────────────────────────────────────── */
+.workingHours {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0.75rem 0;
+}
+
+.hoursRow {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  font-size: 0.82rem;
+}
+
+.hoursDay {
+  color: var(--copper-lt);
+  font-weight: 600;
+  min-width: 2.8rem;
+}
+
+.hoursTime {
+  color: var(--warm-gray);
+}
+
+.hoursConcept {
+  color: rgba(255,255,255,0.35);
+  font-style: italic;
+  font-size: 0.75rem;
+}
+
+/* ── Social links in footer ──────────────────────────────────────────────────── */
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.75rem 0;
+}
+
+.socialLink {
+  color: var(--warm-gray);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.socialLink:hover {
+  color: var(--copper-lt);
+  transform: scale(1.15);
+}
+
+/* ── Floating Back-to-Top ───────────────────────────────────────────────────── */
+.fabTop {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(30, 20, 10, 0.85);
+  border: 1px solid var(--copper);
+  color: var(--copper-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+  z-index: 50;
+  backdrop-filter: blur(6px);
+}
+
+.fabTop.fabVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fabTop:hover {
+  background: var(--copper);
+  color: #fff;
+}
+
+/* ── Floating Group: Call + Reservation ─────────────────────────────────────── */
+.fabGroup {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 50;
+}
+
+.fabCall {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(30, 20, 10, 0.85);
+  border: 1px solid var(--copper);
+  color: var(--copper-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.fabCall:hover {
+  background: var(--copper);
+  color: #fff;
+}
+
+.fabReservation {
+  padding: 0.65rem 1.1rem;
+  border-radius: 2rem;
+  background: var(--copper);
+  border: none;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+  backdrop-filter: blur(6px);
+}
+
+.fabReservation:hover {
+  background: var(--copper-lt);
+  transform: scale(1.03);
 }

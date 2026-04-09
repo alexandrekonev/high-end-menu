@@ -13,6 +13,13 @@ export const settingsQuery = `
     showPriceBgn,
     showPriceEur,
     address,
+    phone,
+    reservationEmail,
+    instagramUrl,
+    facebookUrl,
+    tiktokUrl,
+    googleReviewUrl,
+    workingHours,
     footerNote
   }
 `
