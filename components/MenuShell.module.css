@@ -390,6 +390,8 @@
   gap: 0.3rem;
   font-family: 'Open Sans', sans-serif;
   font-size: 0.85rem;
+  align-items: center;
+  text-align: center;
 }
 
 .address {
@@ -517,6 +519,7 @@
 .socialLinks {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   margin: 0.75rem 0;
 }
@@ -536,7 +539,7 @@
 /* ── Floating Back-to-Top ───────────────────────────────────────────────────── */
 .fabTop {
   position: fixed;
-  bottom: 5.5rem;
+  bottom: 1.5rem;
   right: 1.25rem;
   width: 2.75rem;
   height: 2.75rem;
